@@ -20,4 +20,9 @@ hbase kerberos 参数配置
 conf = HBaseConfiguration.create(); conf.set(&ldquo;hadoop.security.authentication&rdquo;,&ldquo;Kerberos&rdquo;); conf.set(&ldquo;hbase.security.authentication&rdquo;,&ldquo;Kerberos&rdquo;); conf.set(&ldquo;hbase.zookeeper.quorum&rdquo;, ZOOKEEPER_LIST); conf.set(&ldquo;hbase.master.kerberos.principal&rdquo;,&ldquo;hbase/_HOST@GZHLWLGCSKDC&rdquo;); conf.set(&ldquo;hbase.regionserver.kerberos.principal&rdquo;, &ldquo;hbase/_HOST@GZHLWLGCSKDC&rdquo;); conf.set(HConstants.CLIENT_ZOOKEEPER_QUORUM,ZOOKEEPER_LIST); conf.set(HConstants.ZOOKEEPER_CLIENT_PORT,&ldquo;2181&rdquo;); conf.set(HConstants.ZOOKEEPER_ZNODE_PARENT,"/hbase-secure");
 UserGroupInformation.setConfiguration(conf); try { UserGroupInformation.loginUserFromKeytab("bdoc/admin@GZHLWLGCSKDC", "/etc/security/keytabs/bdoc.keytab"); conn = ConnectionFactory.createConnection(conf); admin = (HBaseAdmin) conn.getAdmin(); } catch (IOException e) { e.printStackTrace(); }</article><article class=post><h1 class=post-title><a href=https://rwkey.com/misc/tmp/></a></h1><time datetime=0001-01-01T00:00:00Z class=post-date>Mon, Jan 1, 0001</time>
 java 打 jar 插件：
-maven-compiler-plugin</article></div></main><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','G-CHP0LWG5GF','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script></body></html>
+maven-compiler-plugin
+kerberos authentication
+https://github.com/whg517/blog/blob/master/source/_posts/programming/%E8%BF%9E%E6%8E%A5%E5%B8%A6%E6%9C%89%20Kerberos%20%E8%AE%A4%E8%AF%81%E7%9A%84%20Hadoop%20%20HBase%20Spark.md
+docker 网络
+https://lengrongfu.github.io/2018/11/13/docker-network-beginner/
+nc nmap</article></div></main><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','G-CHP0LWG5GF','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script></body></html>
