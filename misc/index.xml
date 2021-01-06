@@ -12,4 +12,6 @@ docker-compose 先后启动问题 https://www.cnblogs.com/wang_yb/p/9400291.html
 tcp 转发 noob
 https://github.com/Dennis-Zhang-SH/simplelb/blob/master/simple_load_balance.go
 // grpc https://github.com/Bingjian-Zhu/go-grpc-example
-https://erev0s.com/blog/how-hook-android-native-methods-frida-noob-friendly/</description></item></channel></rss>
+https://erev0s.com/blog/how-hook-android-native-methods-frida-noob-friendly/
+make vs new
+https://www.godesignpatterns.com/2014/04/new-vs-make.html</description></item></channel></rss>
