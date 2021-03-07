@@ -3,7 +3,7 @@
 有两种方式
 第一种: 使用微信扫码注册并下载火币
 第二种：用浏览器打开 https://www.huobi.sh/topic/invited/?invite_code=evea3 网址，注册并下载
-加微信：crash_worker 手把手教你买卖操作</description></item><item><title>rust 入门</title><link>https://rwkey.com/posts/2021/01_07_rust_introduction/</link><pubDate>Thu, 07 Jan 2021 17:16:30 +0800</pubDate><guid>https://rwkey.com/posts/2021/01_07_rust_introduction/</guid><description>Rust 安装
+如果有问题请加微信：crash_worker 手把手教你买卖操作</description></item><item><title>rust 入门</title><link>https://rwkey.com/posts/2021/01_07_rust_introduction/</link><pubDate>Thu, 07 Jan 2021 17:16:30 +0800</pubDate><guid>https://rwkey.com/posts/2021/01_07_rust_introduction/</guid><description>Rust 安装
 curl https://sh.rustup.rs -sSf | sh 执行 hello world
 fn main(){ println!(&amp;#34;Rust says Hello to TutorialsPoint !!&amp;#34;); }</description></item><item><title>2021_01_06_go_make_vs_new</title><link>https://rwkey.com/posts/2021/01_06_go_make_vs_new/</link><pubDate>Wed, 06 Jan 2021 15:00:13 +0800</pubDate><guid>https://rwkey.com/posts/2021/01_06_go_make_vs_new/</guid><description>https://www.godesignpatterns.com/2014/04/new-vs-make.html
 new: 申请一块内存，返回地址 make: 用来初始化 slice, map, channel, 返回的不是指针，
