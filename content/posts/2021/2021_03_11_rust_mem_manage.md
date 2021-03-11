@@ -2,8 +2,8 @@
 title: "Rust 内存管理"
 date: 2021-03-11T20:55:20+08:00
 draft: false 
-
 ---
+
 Rust 在编译期间，通过静态分析，确定对象的作用域与生命周期，从而可以确定某个对象不再被使用，将其销毁，并且不会引入任何运行时的开销。
 
 ##### 值类型与引用类型
@@ -36,7 +36,7 @@ fn main() {
 
 此时我们会看到一个编译错误：
 
-```rust
+```bash
 error[E0382]: borrow of moved value: `s1`
  --> src/main.rs:4:29
   |
@@ -50,6 +50,62 @@ error[E0382]: borrow of moved value: `s1`
 
 原因是执行 `let s2 = s1` 语句时，不是将 s1 的内容复制一份给 s2，而是将数据「移动」到了新的变量，原来的变量不能再使用。这样我们就能确保堆上分配的内存都只有唯一的拥有者。
 
-借用（引用）
+##### 借用
 
+我们下面来看一个引用的例子：
+
+```rust
+fn main() {
+   let s1 = String::from("rwkey.com");
+   let len = str_len(s1);
+   println!("s1={}, len={}", s1, len);
+}
+
+fn str_len(str: String) -> usize {
+   return str.len();
+}
+```
+
+此时我们会看到一个编译错误：
+
+```bash
+error[E0382]: borrow of moved value: `s1`
+ --> src/main.rs:4:30
+  |
+2 |    let s1 = String::from("rwkey.com");
+  |        -- move occurs because `s1` has type `String`, which does not implement the `Copy` trait
+3 |    let len = str_len(s1);
+  |                      -- value moved here
+4 |    println!("s1={}, len={}", s1, len);
+  |                              ^^ value borrowed here after move
+```
+
+原因是 s1 被当作参数传入了 str_len 这个函数，根据 move 规则，s1 就失效了，后面的 println！宏调用如果要再次使用 s1 就会发生错误，如果是这样那就太不方便使用了，于是 rust 引入了借用概念，只要在变量或类型前面加 & 前缀即可。我们对上面的代码进行改造：
+
+```rust
+fn main() {
+   let s1 = String::from("rwkey.com");
+   let len = str_len(&s1);
+   println!("s1={}, len={}", s1, len);
+}
+
+fn str_len(str: &String) -> usize {
+   return str.len();
+}
+```
+
+上面的代码可以编译通过，通过 & 操作符号，之前的 move 语义操作变成了 borrow 操作，但是对象的生命周期不会转移，只是暂时借到了新的地方。
+
+##### 借用的可变性
+
+借用规则：
+
+1. 多次只读借用
+2. 一次可变借用
+3. 读借用不能和可变借用共存
+4. 可变借用必须是拥有者可变
+
+##### 生命周期
+
+生命周期是 rust 在编译时对借用的返回值生命周期的无法判断，需要手动指定参数和返回值的生命周期, 用一个 ' 加一个字母表示，比如`'a`
 
