@@ -8,13 +8,40 @@
    <span style=color:#8be9fd;font-style:italic>let</span> s2 <span style=color:#ff79c6>=</span> s1;
    println<span style=color:#ff79c6>!</span>(<span style=color:#f1fa8c>&#34;s1={}, s2={}&#34;</span>, s1, s2);
 }
-</code></pre></div><p>此时我们会看到一个编译错误：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust>error[E0382]: <span style=color:#50fa7b>borrow</span> of moved value: `s1`
- <span style=color:#ff79c6>-</span>-&gt; <span style=color:#50fa7b>src</span><span style=color:#ff79c6>/</span>main.rs:<span style=color:#bd93f9>4</span>:<span style=color:#bd93f9>29</span>
-  <span style=color:#ff79c6>|</span>
-<span style=color:#bd93f9>2</span> <span style=color:#ff79c6>|</span>    <span style=color:#8be9fd;font-style:italic>let</span> s1 <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>String</span>::from(<span style=color:#f1fa8c>&#34;rwkey.com&#34;</span>);
-  <span style=color:#ff79c6>|</span>        <span style=color:#ff79c6>--</span> <span style=color:#ff79c6>move</span> occurs because `s1` has <span style=color:#ff79c6>type</span> `<span style=color:#8be9fd;font-style:italic>String</span>`, which does not implement the `<span style=color:#8be9fd;font-style:italic>Copy</span>` <span style=color:#ff79c6>trait</span>
-<span style=color:#bd93f9>3</span> <span style=color:#ff79c6>|</span>    <span style=color:#8be9fd;font-style:italic>let</span> s2 <span style=color:#ff79c6>=</span> s1;
-  <span style=color:#ff79c6>|</span>             <span style=color:#ff79c6>--</span> value moved here
-<span style=color:#bd93f9>4</span> <span style=color:#ff79c6>|</span>    println<span style=color:#ff79c6>!</span>(<span style=color:#f1fa8c>&#34;s1={}, s2={}&#34;</span>, s1, s2);
-  <span style=color:#ff79c6>|</span>                             <span style=color:#ff79c6>^^</span> value borrowed here after <span style=color:#ff79c6>move</span>
-</code></pre></div><p>原因是执行 <code>let s2 = s1</code> 语句时，不是将 s1 的内容复制一份给 s2，而是将数据「移动」到了新的变量，原来的变量不能再使用。这样我们就能确保堆上分配的内存都只有唯一的拥有者。</p><p>借用（引用）</p></div></main><script async src="https://www.googletagmanager.com/gtag/js?id=G-CHP0LWG5GF"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-CHP0LWG5GF')</script></body></html>
+</code></pre></div><p>此时我们会看到一个编译错误：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>error<span style=color:#ff79c6>[</span>E0382<span style=color:#ff79c6>]</span>: borrow of moved value: <span style=color:#f1fa8c>`</span>s1<span style=color:#f1fa8c>`</span>
+ --&gt; src/main.rs:4:29
+  |
+<span style=color:#bd93f9>2</span> |    <span style=color:#8be9fd;font-style:italic>let</span> <span style=color:#8be9fd;font-style:italic>s1</span> <span style=color:#ff79c6>=</span> String::from<span style=color:#ff79c6>(</span><span style=color:#f1fa8c>&#34;rwkey.com&#34;</span><span style=color:#ff79c6>)</span>;
+  |        -- move occurs because <span style=color:#f1fa8c>`</span>s1<span style=color:#f1fa8c>`</span> has <span style=color:#8be9fd;font-style:italic>type</span> <span style=color:#f1fa8c>`</span>String<span style=color:#f1fa8c>`</span>, which does not implement the <span style=color:#f1fa8c>`</span>Copy<span style=color:#f1fa8c>`</span> trait
+<span style=color:#bd93f9>3</span> |    <span style=color:#8be9fd;font-style:italic>let</span> <span style=color:#8be9fd;font-style:italic>s2</span> <span style=color:#ff79c6>=</span> s1;
+  |             -- value moved here
+<span style=color:#bd93f9>4</span> |    println!<span style=color:#ff79c6>(</span><span style=color:#f1fa8c>&#34;s1={}, s2={}&#34;</span>, s1, s2<span style=color:#ff79c6>)</span>;
+  |                             ^^ value borrowed here after move
+</code></pre></div><p>原因是执行 <code>let s2 = s1</code> 语句时，不是将 s1 的内容复制一份给 s2，而是将数据「移动」到了新的变量，原来的变量不能再使用。这样我们就能确保堆上分配的内存都只有唯一的拥有者。</p><h5 id=借用>借用</h5><p>我们下面来看一个引用的例子：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=color:#ff79c6>fn</span> <span style=color:#50fa7b>main</span>() {
+   <span style=color:#8be9fd;font-style:italic>let</span> s1 <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>String</span>::from(<span style=color:#f1fa8c>&#34;rwkey.com&#34;</span>);
+   <span style=color:#8be9fd;font-style:italic>let</span> len <span style=color:#ff79c6>=</span> str_len(s1);
+   println<span style=color:#ff79c6>!</span>(<span style=color:#f1fa8c>&#34;s1={}, len={}&#34;</span>, s1, len);
+}
+
+<span style=color:#ff79c6>fn</span> <span style=color:#50fa7b>str_len</span>(<span style=color:#8be9fd>str</span>: <span style=color:#8be9fd;font-style:italic>String</span>) -&gt; <span style=color:#8be9fd>usize</span> {
+   <span style=color:#ff79c6>return</span> <span style=color:#8be9fd>str</span>.len();
+}
+</code></pre></div><p>此时我们会看到一个编译错误：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>error<span style=color:#ff79c6>[</span>E0382<span style=color:#ff79c6>]</span>: borrow of moved value: <span style=color:#f1fa8c>`</span>s1<span style=color:#f1fa8c>`</span>
+ --&gt; src/main.rs:4:30
+  |
+<span style=color:#bd93f9>2</span> |    <span style=color:#8be9fd;font-style:italic>let</span> <span style=color:#8be9fd;font-style:italic>s1</span> <span style=color:#ff79c6>=</span> String::from<span style=color:#ff79c6>(</span><span style=color:#f1fa8c>&#34;rwkey.com&#34;</span><span style=color:#ff79c6>)</span>;
+  |        -- move occurs because <span style=color:#f1fa8c>`</span>s1<span style=color:#f1fa8c>`</span> has <span style=color:#8be9fd;font-style:italic>type</span> <span style=color:#f1fa8c>`</span>String<span style=color:#f1fa8c>`</span>, which does not implement the <span style=color:#f1fa8c>`</span>Copy<span style=color:#f1fa8c>`</span> trait
+<span style=color:#bd93f9>3</span> |    <span style=color:#8be9fd;font-style:italic>let</span> <span style=color:#8be9fd;font-style:italic>len</span> <span style=color:#ff79c6>=</span> str_len<span style=color:#ff79c6>(</span>s1<span style=color:#ff79c6>)</span>;
+  |                      -- value moved here
+<span style=color:#bd93f9>4</span> |    println!<span style=color:#ff79c6>(</span><span style=color:#f1fa8c>&#34;s1={}, len={}&#34;</span>, s1, len<span style=color:#ff79c6>)</span>;
+  |                              ^^ value borrowed here after move
+</code></pre></div><p>原因是 s1 被当作参数传入了 str_len 这个函数，根据 move 规则，s1 就失效了，后面的 println！宏调用如果要再次使用 s1 就会发生错误，如果是这样那就太不方便使用了，于是 rust 引入了借用概念，只要在变量或类型前面加 & 前缀即可。我们对上面的代码进行改造：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=color:#ff79c6>fn</span> <span style=color:#50fa7b>main</span>() {
+   <span style=color:#8be9fd;font-style:italic>let</span> s1 <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>String</span>::from(<span style=color:#f1fa8c>&#34;rwkey.com&#34;</span>);
+   <span style=color:#8be9fd;font-style:italic>let</span> len <span style=color:#ff79c6>=</span> str_len(<span style=color:#ff79c6>&amp;</span>s1);
+   println<span style=color:#ff79c6>!</span>(<span style=color:#f1fa8c>&#34;s1={}, len={}&#34;</span>, s1, len);
+}
+
+<span style=color:#ff79c6>fn</span> <span style=color:#50fa7b>str_len</span>(<span style=color:#8be9fd>str</span>: <span style=color:#ff79c6>&amp;</span><span style=color:#8be9fd;font-style:italic>String</span>) -&gt; <span style=color:#8be9fd>usize</span> {
+   <span style=color:#ff79c6>return</span> <span style=color:#8be9fd>str</span>.len();
+}
+</code></pre></div><p>上面的代码可以编译通过，通过 & 操作符号，之前的 move 语义操作变成了 borrow 操作，但是对象的生命周期不会转移，只是暂时借到了新的地方。</p><h5 id=借用的可变性>借用的可变性</h5><p>借用规则：</p><ol><li>多次只读借用</li><li>一次可变借用</li><li>读借用不能和可变借用共存</li><li>可变借用必须是拥有者可变</li></ol><h5 id=生命周期>生命周期</h5><p>生命周期是 rust 在编译时对借用的返回值生命周期的无法判断，需要手动指定参数和返回值的生命周期, 用一个 ' 加一个字母表示，比如<code>'a</code></p></div></main><script async src="https://www.googletagmanager.com/gtag/js?id=G-CHP0LWG5GF"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-CHP0LWG5GF')</script></body></html>
