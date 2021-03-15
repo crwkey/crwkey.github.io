@@ -1,3 +1,9 @@
+---
+title: "Misc"
+date: 2020-11-10T19:19:40+08:00
+draft: false 
+---
+
 java 打 jar 插件：
 
 maven-compiler-plugin
@@ -34,5 +40,3 @@ https://erev0s.com/blog/how-hook-android-native-methods-frida-noob-friendly/
 make vs new 
 
 https://www.godesignpatterns.com/2014/04/new-vs-make.html
-
-

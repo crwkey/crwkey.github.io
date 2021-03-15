@@ -1,7 +1,7 @@
 ---
-title: "Proxy_settings"
+title: "代理配置"
 date: 2020-12-10T15:26:15+08:00
-draft: true
+draft: false 
 ---
 
 Git 代理配置

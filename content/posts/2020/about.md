@@ -1,6 +1,8 @@
 ---
 title: "About"
 date: 2020-10-23T18:15:51+08:00
-draft: true 
+draft: false 
 ---
+
+我是 `rwkey`, 一名技术爱好者，在这里我将分享我的技术，欢迎大家关注我的博客
 
