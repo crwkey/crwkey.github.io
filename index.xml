@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>rwkey</title><link>https://rwkey.com/</link><description>Recent content on rwkey</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 17 Mar 2021 09:36:21 +0800</lastBuildDate><atom:link href="https://rwkey.com/index.xml" rel="self" type="application/rss+xml"/><item><title>Linux 常用命令</title><link>https://rwkey.com/posts/linux/2021_03_17_linux_common_command/</link><pubDate>Wed, 17 Mar 2021 09:36:21 +0800</pubDate><guid>https://rwkey.com/posts/linux/2021_03_17_linux_common_command/</guid><description>远程登录
-ssh -v user@host -p 8855 scp -v -P 8855 file user@host:/data/rwkey python3 -m http.server --bind 0.0.0.0 默认端口 8000 开 web 服务 python -m SimpleHTTPServer 8000 &amp;amp;</description></item><item><title>redis 常用命令</title><link>https://rwkey.com/posts/2021/03_15_redis_commands/</link><pubDate>Mon, 15 Mar 2021 11:25:58 +0800</pubDate><guid>https://rwkey.com/posts/2021/03_15_redis_commands/</guid><description>连接 reids 服务器
+ssh -v user@host -p 8855 scp -v -P 8855 file user@host:/data/rwkey python3 -m http.server --bind 0.0.0.0 默认端口 8000 开 web 服务 python -m SimpleHTTPServer 8000 &amp;amp; docker 命令
+docker save 127.0.0.1:5001/xxx | gzip &amp;gt; xxx.tgz
+docker push 127.0.0.1:5001/xxx
+docker load &amp;lt; xxx.tgz
+日志从后往前看
+tac log.log | more</description></item><item><title>redis 常用命令</title><link>https://rwkey.com/posts/2021/03_15_redis_commands/</link><pubDate>Mon, 15 Mar 2021 11:25:58 +0800</pubDate><guid>https://rwkey.com/posts/2021/03_15_redis_commands/</guid><description>连接 reids 服务器
 redis-cli -h host -p 6379
 常用命令
 查看过期时间
