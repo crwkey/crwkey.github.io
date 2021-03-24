@@ -30,3 +30,7 @@ docker save 127.0.0.1:5001/xxx | gzip > xxx.tgz
 docker push 127.0.0.1:5001/xxx
 
 docker load < xxx.tgz
+
+日志从后往前看
+
+tac log.log | more
