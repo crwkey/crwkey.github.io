@@ -15,3 +15,5 @@ solution:
 using  DOCKER_BUILDKIT=0 docker build xxxx
 
 
+this is docker buildkit bug:
+https://github.com/moby/buildkit/issues/721
