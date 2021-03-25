@@ -1,0 +1,17 @@
+---
+title: "Common_issues"
+date: 2021-03-25T09:29:35+08:00
+draft: false 
+---
+
+### docker issue
+
+Error [internal] load metadata for 
+
+failed to solve with frontend dockerfile.v0
+
+solution:
+
+using  DOCKER_BUILDKIT=0 docker build xxxx
+
+
