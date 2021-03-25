@@ -5,6 +5,7 @@ draft: false
 ---
 
 ### docker issue
+docker version: 20.10.5
 
 Error [internal] load metadata for 
 
