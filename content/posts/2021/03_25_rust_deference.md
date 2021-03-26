@@ -33,7 +33,7 @@ fn main() {
      //字符串
     let str: String = String::from("rwkey.com");
     let str1 = &str; 
-    //let str2 = *str1; //赋值，会 move 改变所有权，这是不允许的
+    //let str2 = *str1; //赋值，会 move 改变所有权，这是不允许的, 它想取，但取不到
     let str3 = &*str1; //还是借用
     println!("{:p}, {:p}", str1, str3); //0x7ffee2fe0770, 0x7ffee2fe0770
     println!("{:p}, {:p}", str1, &*str1); // &* 就是指向原变量 0x7ffee2fe0770, 0x7ffee2fe0770
