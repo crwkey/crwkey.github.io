@@ -12,7 +12,7 @@
      <span style=color:#6272a4>//字符串
 </span><span style=color:#6272a4></span>    <span style=color:#8be9fd;font-style:italic>let</span> <span style=color:#8be9fd>str</span>: <span style=color:#8be9fd;font-style:italic>String</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>String</span>::from(<span style=color:#f1fa8c>&#34;rwkey.com&#34;</span>);
     <span style=color:#8be9fd;font-style:italic>let</span> str1 <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>&amp;</span><span style=color:#8be9fd>str</span>; 
-    <span style=color:#6272a4>//let str2 = *str1; //赋值，会 move 改变所有权，这是不允许的
+    <span style=color:#6272a4>//let str2 = *str1; //赋值，会 move 改变所有权，这是不允许的, 它想取，但取不到
 </span><span style=color:#6272a4></span>    <span style=color:#8be9fd;font-style:italic>let</span> str3 <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>&amp;*</span>str1; <span style=color:#6272a4>//还是借用
 </span><span style=color:#6272a4></span>    println<span style=color:#ff79c6>!</span>(<span style=color:#f1fa8c>&#34;{:p}, {:p}&#34;</span>, str1, str3); <span style=color:#6272a4>//0x7ffee2fe0770, 0x7ffee2fe0770
 </span><span style=color:#6272a4></span>    println<span style=color:#ff79c6>!</span>(<span style=color:#f1fa8c>&#34;{:p}, {:p}&#34;</span>, str1, <span style=color:#ff79c6>&amp;*</span>str1); <span style=color:#6272a4>// &amp;* 就是指向原变量 0x7ffee2fe0770, 0x7ffee2fe0770
