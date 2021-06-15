@@ -124,9 +124,9 @@ proxies:
 # VMess
 - name: "cdn"
   type: vmess
-  server: www.srealisreal002.xyz
+  server: www.srealisreal011.xyz
   port: 443
-  uuid: c47659ab-91e2-48cd-88b7-0b53442acbab
+  uuid: d77942a0-574c-4e68-999b-477845422a6e
   alterId: 233
   cipher: aes-128-gcm
   # udp: true
