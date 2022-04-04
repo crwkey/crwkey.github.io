@@ -1,0 +1,283 @@
+<!doctype html><html xmlns=http://www.w3.org/1999/xhtml xml:lang=en-us lang=en-us><head><link href=https://gmpg.org/xfn/11 rel=profile><meta charset=utf-8><meta name=generator content="Hugo 0.96.0"><meta name=viewport content="width=device-width,initial-scale=1"><script async src="https://www.googletagmanager.com/gtag/js?id=G-CHP0LWG5GF"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-CHP0LWG5GF")</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2009162505910536" crossorigin=anonymous></script><title>rwkey</title><meta name=description content="北漂码农"><link type=text/css rel=stylesheet href=https://rwkey.com/css/print.css media=print><link type=text/css rel=stylesheet href=https://rwkey.com/css/poole.css><link type=text/css rel=stylesheet href=https://rwkey.com/css/syntax.css><link type=text/css rel=stylesheet href=https://rwkey.com/css/hyde.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700"><link rel=apple-touch-icon-precomposed sizes=144x144 href=/apple-touch-icon-144-precomposed.png><link rel="shortcut icon" href=/favicon.png><link href=https://rwkey.com/index.xml rel=alternate type=application/rss+xml title=rwkey></head><body><aside class=sidebar><div class="container sidebar-sticky"><div class=sidebar-about><a href=https://rwkey.com/><h1>rwkey</h1></a><p class=lead>北漂码农</p></div><nav><ul class=sidebar-nav><li><a href=https://rwkey.com/>Home</a></li><li><a href=https://github.com/crwkey/>Github</a></li></ul></nav><p>&copy; 2022. All rights reserved.</p></div></aside><main class="content container"><div class=posts><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/films/>电影网剧分享</a></h1><time datetime=2022-04-03T12:57:36+0800 class=post-date>Sun, Apr 3, 2022</time>
+https://qianoo.cn/ https://ddrk.me/ https://github.com/tgbot-collection/YYeTsBot</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/linux/nofile/>Nofile</a></h1><time datetime=2022-03-31T08:12:12+0800 class=post-date>Thu, Mar 31, 2022</time>
+ulimit -a
+/etc/security
+limits.d 或 limits.conf
+limits.d 文件会覆盖 limits.conf
+一个 nofile， 另一个 proc
+重新登录会生效</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/linux/selinux/>Selinux</a></h1><time datetime=2022-03-31T08:10:26+0800 class=post-date>Thu, Mar 31, 2022</time>
+临时开关 setenforce 0 | setenforce 1 //持久开关，需要重启 /etc/senlinux/config</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/infra/cubejs/>Cubejs 入门</a></h1><time datetime=2022-03-29T14:52:55+0800 class=post-date>Tue, Mar 29, 2022</time>
+查询 schema 对应的 SQL curl -fsSL -G \ --data-urlencode 'query={"measures":["AccessAirlineView.count"],"timeDimensions":[{"dimension":"AccessAirlineView.ts","dateRange":"today"}],"order":{},"filters":[],"dimensions":["AccessAirlineView.risk"],"timezone":"Asia/Shanghai"}' \ 'http://172.31.33.213:4000/cubejs-api/v1/sql' \ | jq . "SELECT\n JSONExtractString(arrayJoin(result_risk), 'RiskName') `access_airline_view__risk`, count(`access_airline_view`.id) `access_airline_view__count`\n FROM\n default.access AS `access_airline_view` WHERE (`access_airline_view`.ts >= parseDateTimeBestEffort(?) AND `access_airline_view`.ts &lt;= parseDateTimeBestEffort(?)) GROUP BY `access_airline_view__risk` ORDER BY `access_airline_view__count` DESC LIMIT 10000", [ "2022-03-28T16:00:00Z", "2022-03-29T15:59:59Z" ]</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/infra/pgsql/>postgres 数据库 常用命令</a></h1><time datetime=2022-03-28T21:01:49+0800 class=post-date>Mon, Mar 28, 2022</time>
+连接数据库 psql -U postgres -d table_name 查看表 \d \d + 表名</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/infra/clickhouse_01/>Clickhouse 入门</a></h1><time datetime=2022-03-28T11:18:40+0800 class=post-date>Mon, Mar 28, 2022</time>
+什么是Clickhouse? 列式存储
+ck 引擎
+MergeTree ReplicatedMergeTree Distributed SQL
+JSON 格式化输出： select * from config_tag FORMAT JSON;
+创建物化视图
+命令行启动 clickhoue-client -m
+命令行插入 字符串需要单引号
+insert into Name values(&lsquo;1&rsquo;,&lsquo;hell&rsquo;); clickhouse 数组从 1 开始 而不是 0
+clickhouse 实战
+https://blog.csdn.net/xch_yang/article/details/123591740 问题，如何删除两条一摸一样的数据，并且保留一条
+clickhouse 字符串必须用单引号括起来，不能双引号
+安装 分布式需要安装 zookeeper Dbeaver 连接 https://segmentfault.com/a/1190000038318776</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/tools/devops/>DevOps</a></h1><time datetime=2022-03-28T10:08:26+0800 class=post-date>Mon, Mar 28, 2022</time>
+远程桌面网关 (next-terminal) https://gitee.com/dushixiang/next-terminal</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/linux/linux_command_line_bash_shorts_keys/>Bash 命令行快捷键</a></h1><time datetime=2022-03-27T17:35:53+0800 class=post-date>Sun, Mar 27, 2022</time>
+查看日志，有时候会看到很多日志，想暂停下来看 ctrl + s, 恢复查看 ctrl + q
+退出 ssh 连接, ctrl + d
+向前删除一个单词 alt + delete
+https://www.tecmint.com/linux-command-line-bash-shortcut-keys/#comments</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/linux/ps/>进程查看</a></h1><time datetime=2022-03-26T18:36:54+0800 class=post-date>Sat, Mar 26, 2022</time>
+ps 显示进程 ps -aux ps -ef
+显示带线程, 标识是 NLWP ps -eLf top -H -p 18020
+ps -T -p 28001, 其中 SPID 代表线程ID
+或者 top， 然后 shift + H
+cat /proc/28001/status ls /proc/28001/task
+显示进程树 -H &ndash; 显示进程继承层次 -h &ndash; 不显示头信息
+ps -H ps -ef f
+显示进程树 pstree pstree -p 28001</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/tools/ssh/>Ssh 常用命令</a></h1><time datetime=2022-03-25T23:13:55+0800 class=post-date>Fri, Mar 25, 2022</time>
+我们经常会遇到 ssh 长时间不用会卡住, 这时我们可以按 ~.退出。 ssh 会话保持
+客户端在 .ssh/config 文件配置
+TCPKeepAlive=yes ServerAliveInterval 180 ServerAliveCountMax 3</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/tools/sshfs/>sshfs 文件挂载</a></h1><time datetime=2022-03-25T23:13:55+0800 class=post-date>Fri, Mar 25, 2022</time>
+sshfs 文件挂载
+https://www.cnblogs.com/rongfengliang/p/10800128.html</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/linux/curl/>Curl 命令</a></h1><time datetime=2022-03-25T14:32:56+0800 class=post-date>Fri, Mar 25, 2022</time>
+参考： https://www.jianshu.com/p/ac019dc3a0f7
+curl -fsSL https://rwkey.com/images/avatar.jpg
+-f 显示错误状态, 而不是返回内容 -s 不显示正在进行的任务，包括错误 -S 显示错误 -L 跟随重定向
+curl https://www.shenzhenair.com/vodka/v1/dfp/bootstrap.js
+返回
+&lt;a href="/vodka/v1/js/bootstrap_cdn.js">Found&lt;/a>. curl -L https://www.shenzhenair.com/vodka/v1/dfp/bootstrap.js</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/tools/basic_android_commands/>android 开发常用命令</a></h1><time datetime=2022-03-23T18:46:10+0800 class=post-date>Wed, Mar 23, 2022</time>
+adb 相关 列出连接设备
+adb devices -l</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/tools/vim/>Vim 基础进阶</a></h1><time datetime=2022-03-18T18:40:32+0800 class=post-date>Fri, Mar 18, 2022</time>
+vim 剪切板互换数据 vim &ndash;version | grep clip 复制数据到剪贴板 &ldquo;+y 从剪贴板复制数据到vim &ldquo;+p 查看剪贴板 :reg
+替换
+:%s//Users/dev4mobile/$HOME/g</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/tools/docker/>Docker 常用命令</a></h1><time datetime=2022-03-18T12:36:12+0800 class=post-date>Fri, Mar 18, 2022</time>
+查询 docker 错误日志 grep -Ei -C 100 'err|exception|fatal|error|panic|failed|fail' `docker inspect --format='{{.LogPath}}' container_id` docker logs -f container_id --tail 20 docker 镜像加速 针对Docker客户端版本大于 1.10.0 的用户 您可以通过修改daemon配置文件/etc/docker/daemon.json来使用加速器
+sudo mkdir -p /etc/docker sudo tee /etc/docker/daemon.json &#171;-&lsquo;EOF&rsquo; { &ldquo;registry-mirrors&rdquo;: [&ldquo;https://6a1o9a2p.mirror.aliyuncs.com&rdquo;] } EOF sudo systemctl daemon-reload sudo systemctl restart docker</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/linux/basic_linux_commands/>基本 linux 命令</a></h1><time datetime=2022-03-17T19:15:27+0800 class=post-date>Thu, Mar 17, 2022</time>
+网络相关 tcpdump 命令用法
+tcpdump -D， 列出监听的网络接口 host 命令 比如想查询域名的 A 记录 host -t A rwkey.com
+磁盘 lsblk df -h, 磁盘是否满 dh -sh . 或 dh -d1 -h . | grep G | sort -h 清空文件 sh -c "cat /dev/null > ${log_file_name} "或者> ${log_file_name}
+查找字符串 strings file | grep &ldquo;rwkey.com&rdquo;</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/tools/markdown/>Markdown</a></h1><time datetime=2022-03-17T10:54:39+0800 class=post-date>Thu, Mar 17, 2022</time>
+Markdown 学习 https://www.markdownguide.org/basic-syntax/</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/tools/basic_git_commands/>Git 常用命令</a></h1><time datetime=2022-03-17T09:27:27+0800 class=post-date>Thu, Mar 17, 2022</time>
+拉取最新的 tags
+git fetch --tags
+checkout 最新的 tag
+latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`) && git checkout tags/${latest_tag} -b ${latest_tag}
+来回切换上一次的分支
+git switch - 或 git checkout -, 类似 Linux 命令的 cd - 用法
+切换指定的 commit git checkout commit_id
+上传大文件 (安装 git lfs) brew install git-lfs git lfs track [file]
+参考
+https://devconnected.com/how-to-checkout-git-tags/
+https://www.techiedelight.com/clone-specific-tag-with-git/ https://blog.csdn.net/gtLBTNq9mr3/article/details/110729551</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/2022/go_project_improve/>Go 工程改善</a></h1><time datetime=2022-03-16T09:44:37+0800 class=post-date>Wed, Mar 16, 2022</time>
+Go linter 工具 &ndash; revive
+https://dev.to/s0xzwasd/configure-revive-go-linter-in-goland-2ggl Go 开发效率工具汇总
+https://blog.csdn.net/hjxisking/article/details/108096001</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/tools/tools/>常用的开发工具</a></h1><time datetime=2022-03-15T12:26:08+0800 class=post-date>Tue, Mar 15, 2022</time>
+网络相关 查询当前机器网络环境，比如: 公网ip，ua，forwarded，mime type
+用法一：浏览器打开网址: https://ifconfig.me 用法二：查询公网 ip： curl ifconfig.me 用法三：查询 ua： curl ifconfig.me/ua 用法四：查询 forwarded: curl ifconfig.me/forwarded 查询 ip 地址归属地
+用法一：查询某个 ip 地址归属地：curl cip.cc/203.218.89.26 用法二：查询当前 ip 地址归属地：curl cip.cc/$(curl -s ifconfig.me) 网络实验室
+头歌实践教学平台 https://www.educoder.net 蓝桥 https://www.lanqiao.cn/courses/1 Free cdn
+cloudinary.com 网站性能测试
+https://ping.pe/ 画图相关 asciiflow https://asciiflow.com/#/
+drawio https://app.<div class=read-more-link><a href=/posts/tools/tools/>Read More…</a></div></article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/2022/rust_unsafe/>Rust unsafe</a></h1><time datetime=2022-03-06T21:28:23+0800 class=post-date>Sun, Mar 6, 2022</time>
+不会获得编译器保证安全， 承诺编译是安全的代码
+写 unsafe 代码时，
+Note：
+函数级别的unsafe，调用者要使用 unsafe {}，指明不安全代码 trait 级别的 unsafe， impl 者保证 unsafe， 调用者正常调用 对裸指针的解引用是不安全的，此时可变指针和不可变指针共存 4.ffi， 使用其它语言的能力，比如说调用 go library，同样需要unsafe 代码块 不推荐使用 unsafe 场景 修改可变静态变量 问题： unsafe 的错误能捕获？在保证程序能正常运行的前提下</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/2022/rust_reference/>Rust 自动解引用与强制解引用</a></h1><time datetime=2022-02-07T22:11:38+0800 class=post-date>Mon, Feb 7, 2022</time>
+Rust 有一个叫 自动引用和解引用（automatic referencing and dereferencing）的功能。方法调用是 Rust 中少数几个拥有这种行为的地方。
+他是这样工作的：当使用 object.something() 调用方法时，Rust 会自动为 object 添加 &、&mut 或 * 以便使 object 与方法签名匹配。也就是说，这些代码是等价的：
+p1.distance(&p2); (&p1).distance(&p2); 第一行看起来简洁的多。这种自动引用的行为之所以有效，是因为方法有一个明确的接收者———— self 的类型。在给出接收者和方法名的前提下，Rust 可以明确地计算出方法是仅仅读取（&self），做出修改（&mut self）或者是获取所有权（self）。
+println! 宏也可以自动解引用
+强制解引用（Deref coercion) 是一种执行在函数和方法的参数上的便利。它只能用于那些实现了Deref trait的类型。 强制解引用，将一种类型的引用转换成另一种类型的引用。比如它可将 &String 转换成 &str 因为 String实现了 Deref trait, 返回一个 &str
+当我们传递一个特定类型的的值的引用给一个函数/方法时，如果同函数/方法中定义的参数类型不匹配时，会自动进行解引用。一系列 deref 方法会被调用，用来在我们提供的类型，和参数所需要的类型之间 实施转换。
+程序员在写函数/方法时， 不必要添加 许多 明示的 引用 （&）或者解引用（*） 强制解引用也让我们写的代码更好地同时工作在 引用/智能指针上。</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/2022/rust_basic/>Rust 问题解惑</a></h1><time datetime=2022-02-07T17:12:39+0800 class=post-date>Mon, Feb 7, 2022</time>
+fn main() { let regions = [&ldquo;southern_germany&rdquo;, &ldquo;chinese&rdquo;, &ldquo;english&rdquo;]; // for regin in regions.iter() { // println!("{}", regin); // }
+for region in regions.into_iter() { println!("{}", region); } for region in regions { println!("{}", region); } // let f = 13.24; // let r: f64 = 13.14f64.round(); // println!("{}, {}", r, f); }
+https://doc.rust-lang.org/edition-guide/rust-2021/IntoIterator-for-arrays.html
+let s = &ldquo;hello&rdquo; let s2 = &amp;s; println!("{}", s2) // 会自动解引用
+https://doc.rust-lang.org/std/primitive.array.html</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/2022/rust_async/>Rust 异步编程</a></h1><time datetime=2022-02-06T13:33:39+0800 class=post-date>Sun, Feb 6, 2022</time>
+为什么需要异步 async/await 介绍 异步编程模型 带大家实现一个简化版的 future</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/2022/rust_macro/>Rust 宏</a></h1><time datetime=2022-02-05T22:36:58+0800 class=post-date>Sat, Feb 5, 2022</time>
+宏是编译的中间件
+学习过程宏工程: github proc-macro-workshop</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/2022/rust_closure/>Rust 闭包</a></h1><time datetime=2022-02-05T14:31:14+0800 class=post-date>Sat, Feb 5, 2022</time>
+调试工具： rust-gdb
+返回闭包使用 impl 关键字
+fn return_closure() -> impl Fn(String) { let s = String::from("hello world"); move |s|println!("{}", s) } fn main() { let f = return_closure(); f("aa".to_string()); }</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/2022/rust_pointer/>Rust 智能指针</a></h1><time datetime=2022-02-03T23:14:29+0800 class=post-date>Thu, Feb 3, 2022</time>
+什么是智能指针? &ldquo;智能&rdquo; 究竟是什么意思？ 智能指针如何工作？ Box，Cell, RefCell, Rc, Arc, RwLock, Mutex, 这些智能指针的作用是什么？ String, Vec 也是智能指针
+Rust 中， Trait 决定了类型的行为，那么智能指针主要实现以下两个 Trait：
+Deref trait -> 拥有指针语义 Drop trait -> 拥有内存自动管理机制 Copy 语义， Move 语义
+解引用 * 是强制解引用， .，& 传参数 是自动解引用 *x -> *(x.deref)
+智能指针智能在何处？
+可以智能解引用，提升开发体验 deref trait 可以自动化管理内存，安全无忧 drop trait 遇到 . 操作符时，会触发自动解引用
+标准库智能指针
+Box vec 和 string rc 和 ARC cell 和 Refcell RwLock 和 mutex Rust 编译时需要知道一个类型需要占用空间多大，递归和 trait对象不知道空间大小<div class=read-more-link><a href=/posts/2022/rust_pointer/>Read More…</a></div></article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/2022/rust_trait/>Rust trait</a></h1><time datetime=2022-02-03T15:06:39+0800 class=post-date>Thu, Feb 3, 2022</time>
+trait 四种作用 入门 trait trait 静态分发 &ndash; 没有开销的抽象 trait 动态分发 &ndash; 有运行时开销(寻址过程) 性能测试 四种作用
+接口(interface) 标记 (sized, copy 给编译器用, 识别一些固定的行为) 范型标记 (入参，出参作为范型限定) 抽象类型（trait object） 相当于动态语言, 静态调用，动态调用｜动态分发 一个trait 是针对未知类型（Self）定义的方法的一个集合
+静态分发： 通过范型来实现， 编译器使用具体的类型来生成非范型版本的函数, rust 单态化，会使文件变大
+//静态分发 fn print1(d: impl Draw) { d.draw(); } 等价于下面 fn print2&lt;T: Draw>(t: &T) { t.draw(); } 动态分发
+动态分发发生在运行时
+Rust 动态分发是通过 trait object 来实现的，Rust 会在运行时根据 Trait Object 中的指针来调用相应版本的函数。
+trait object 创建： 指针（如引用，智能指针）+ dyn 关键字 + 要实现的 trait（一个或多个，trait 之间用 + 连接）如： &dyn Trait、Box, 其意思就是：只要一个实现了指定的trait(s), 即满足该约束。</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/2022/rust_tests/>Rust 如何编写测试</a></h1><time datetime=2022-02-03T10:58:48+0800 class=post-date>Thu, Feb 3, 2022</time>
+原理：执行 cargo test 会生成二进制文件 -> 入口函数 -> 生成 main 函数, main 函数里包含 (#[test], + tests 目录下 + 注释下测试)，其中 tests 目录，会执行集成测试 默人是并行运行，起很多线程并行运行每个测试 如果想要串行运行： cargo test &ndash;thread_num=1 背后其实是执行命令： rustc &ndash;test src/lib.rs 告诉 rustc 生成一个运行所有单元测试的二进制文件, (启用 cfg, 放入 main 函数)
+cargo test RUST_TEST_THREADS=1
+fn sum(a: i8, b: i8) -> i8 { a + b } #[cfg(test)] mod tests { use super::*; #[test] #[ignore] fn it_works() { assert_eq!<div class=read-more-link><a href=/posts/2022/rust_tests/>Read More…</a></div></article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/2022/rust_cargo_manage/>Cargo 包管理</a></h1><time datetime=2022-02-02T18:19:53+0800 class=post-date>Wed, Feb 2, 2022</time>
+为啥需要包管理器？ 模块化? 版本管理 模块重用 依赖 模块化编程 IDE 友好 模块化编程（把大代码文件拆成小的模块）
+package(按照约定目录结构管理)
+版本管理（编写包的时候，难免会依赖第三方包）解决依赖
+包管理工具
+cargo
+crate
+crate.io
+cargo new toml 配置文件
+cargo help new cargo new &ndash;lib study 为啥用 toml 文件管理， 转化为 hash 表
+模块化 解决模块化，高效做开发, 模块系统是如何工作的？ mod, pub 关键字的作用 构建模块树
+crate 根 -> main.rs -> mod 声明 —> config.<div class=read-more-link><a href=/posts/2022/rust_cargo_manage/>Read More…</a></div></article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/2022/rust_handle_error/>优雅的处理 Rust 错误</a></h1><time datetime=2022-02-02T11:48:54+0800 class=post-date>Wed, Feb 2, 2022</time>
+unwarp fn main() { let path = "/home/test.txt"; read_file(path); } fn read_file(path: &str) -> String { // unwarp 用于 Option 或 Result的结果获取 std::fs::read_to_string(path).unwrap() } 上面程序会 panic
+避免使用 unwrap
+fn main() { let path = "/home/test.txt"; match read_file(path) { Ok(file) => { // 可能有嵌套， 再一次 match println!("{}", file); } Err(e) => { println!("{}, {}", path, e); } } } //枚举的好处: 多选一， OK 和 Err(限定在有限的集合中） //健壮性: 对程序运行的结果全部可控 fn read_file(path: &str) -> Result&lt;String, std::io::Error>{ std::fs::read_to_string(path) } unwrap -> result,mathch(不会 painc) -> 自定义错误 + From 转换（?<div class=read-more-link><a href=/posts/2022/rust_handle_error/>Read More…</a></div></article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/2022/build_vercel_blog/>使用 Vercle + Github 搭建博客</a></h1><time datetime=2022-02-02T09:51:49+0800 class=post-date>Wed, Feb 2, 2022</time>
+前言 如何使你的 blog 秒开，今天我们使用Vercel来搭建咱们的博客，有几个步骤
+注册 github, 地址： https://github.com/，这里不做过多赘述 注册 vercel 打开 https://vercel.com/signup 进行注册 点击 Continue with Github
+弹出授权页面, 点击授权 选择 +86，然后输入你的手机号，点击 continue</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/tools/frida/>Frida</a></h1><time datetime=2021-12-07T15:42:52+0800 class=post-date>Tue, Dec 7, 2021</time>
+安装 frida pip3 install frida-tools pip3 install frida
+~ ❯❯❯ adb shell ✘ 1 OnePlus7:/ $ getprop ro.product.cpu.abi arm64-v8a OnePlus7:/ $ 查看设备信息 App
+Device Info HW
+下载 frida-server
+https://github.com/frida/frida/releases</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/language/rust/articles/>Articles</a></h1><time datetime=2021-11-09T12:39:02+0800 class=post-date>Tue, Nov 9, 2021</time>
+优秀的 rust 文章
+https://blog.thoughtram.io/ownership-in-rust/</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/software/chrome/>Chrome</a></h1><time datetime=2021-11-09T12:36:15+0800 class=post-date>Tue, Nov 9, 2021</time>
+防止 DNS 污染， 在 chrome 设置 -> 隐私 -> 配置 dns</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/language/golang/nil_issue/>Nil_issue</a></h1><time datetime=2021-09-11T23:05:57+0800 class=post-date>Sat, Sep 11, 2021</time>
+为什么 nil 不等于 nil 我们在开发过程中会遇到使用==比较时会返回意想不到结果，常常与我们设想的结果不太一致。 首先我们看下面一段代码。我们有两个变量，每个变量都有它们自己的类型，但是每个变量都被赋值为nil。
+var a *int = nil var b interface{} = nil 下面的语句将会打印什么
+fmt.Println("a == nil:", a == nil) fmt.Println("b == nil:", b == nil) fmt.Println("a == b:", a == b) 实际输出结果
+a == nil: true b == nil: true a == b: false 现在我们看另外一个例子，我们用另外一种方式来给 b 赋值
+var a *int = nil var b interface{} = a fmt.Println("a == nil:", a == nil) fmt.Println("b == nil:", b == nil) fmt.<div class=read-more-link><a href=/posts/language/golang/nil_issue/>Read More…</a></div></article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/tools/github_issue/>github 提交问题</a></h1><time datetime=2021-08-16T10:16:03+0800 class=post-date>Mon, Aug 16, 2021</time>
+提交代码发生了这样的问题：
+remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.
+remote: Please see https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/ for more information.
+fatal: unable to access &lsquo;https://github.com/zhoulujun/algorithm.git/': The requested URL returned error: 403
+因为使用了 https地址，而应该使用 ssh 地址
+解决方案： 将 remote 地址 改成 ssh 地址
+命令： git remote set-url origin git@gihub.com:xxx/repository
+[hello.com](mailto: cn.dev4mobile@gmai.com)</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/language/golang/plugin_learning/>Go 插件化开发</a></h1><time datetime=2021-08-11T09:38:24+0800 class=post-date>Wed, Aug 11, 2021</time>
+编写插件 插件入口package必须为main，可以不包含main方法
+go build -buildmode=plugin -o hello_plugin.so . 生成 hello_plugin.so 插件</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/tools/yaml/>Yaml</a></h1><time datetime=2021-08-10T16:35:00+0800 class=post-date>Tue, Aug 10, 2021</time></article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/tools/typora/>Typora 技巧</a></h1><time datetime=2021-08-09T16:35:00+0800 class=post-date>Mon, Aug 9, 2021</time>
+[toc]
+下面我会列举一些我在使用Typora遇到的一些问题
+基本概念 什么是减缩进?
+缩进一般代表四个空格，也可以设置为两个空格，英文叫做 indent，按下 Tab 键就是一个缩进，减缩进就是跟缩进的方向相反，英文称作 outdent，电脑操作按键就是 shift + Tab 常见问题 换行问题
+直接输入 Enter 进行段落换行，后面会自动加空行，Shift + Enter进行软换行，不会加空行, space+space+Enter 也是软换行，推荐使用，因为它的兼容性比较好 快速与标题行对齐
+多次 Enter 会自动减缩进，比如我在当前行按回车，下一行会出现 3., 如果我连续敲两次次 Enter, 会自动与常见问题对齐 cmd +]  缩进， cmd+[减缩进</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/2021/04_10_shell_interception/>SHELL 字符串截取</a></h1><time datetime=2021-04-10T10:57:58+0800 class=post-date>Sat, Apr 10, 2021</time>
+关于 Linux SHELL 字符串截取有几种方法，第一种就是 ${var} 运算符，另外一种就是 cut 命令。
+${var} 运算符 命令 用法 ${var#*string} var 是变量名， #是运算符，*string 表示从左边开始删除第一个string及左边的字符 ${var##* string} 在 var 字符串里面从左往右找，删除最后一个找到的 string，以及左边的字符 ${var%string*} 在 var 字符串里面从右往左找，删除第一个找到的 string，以及右边的字符 ${var%%string*} 在 var 字符串里面从右往左找，删除最后一个找到的 string，以及右边的字符 ${var:n1:len} 截取 var 字符串里面从第n1个字符串开始的 len 个字符 ${var:n1} 从 var 第 n1 个字符开始，一直到结束 ${var:0-n1} 从右第n1个字符开始，直到结束 ${var:0-n1:len} 从右第 n1 个字符开始，取 len 个字符，直到结束 举例说明<div class=read-more-link><a href=/posts/2021/04_10_shell_interception/>Read More…</a></div></article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/2021/03_29_twelve_go_best_practices/>Go 最佳实践</a></h1><time datetime=2021-03-29T12:50:18+0800 class=post-date>Mon, Mar 29, 2021</time>
+Go 最佳实践（https://talks.golang.org/2013/bestpractices.slide#2）
+最佳实践简单来说就是 简单，可读，可维护
+第一、避免嵌套
+我们先来看一段代码
+定义一个 Gopher， 然后给 Gopher 增加一个方法 WriteTo，输入参数类型是 io.Writer, 返回值是写入的长度和</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/2021/03_25_rust_deference/>Rust 解引用本质</a></h1><time datetime=2021-03-25T22:40:10+0800 class=post-date>Thu, Mar 25, 2021</time>
+Rust 解引用本质 我们知道 rust 引用使用 &，解引用使用 *，于是 * 解引用就拥有了数据所有权，但是我们想要使用解引用的数据，必须赋给一个变量，这样一旦发生赋值，那么如果该类型实现了 Trait 特性， 就是使用 Copy 语义，否则使用 Move 语义。
+整形例子：
+fn main() { let a: i32 = 12; let b = &amp;a; let c = *b; // *b 取得12，然后发生 12 copy 到定义的 c,所以 b 和 c 的地址不一样 println!("{:p}, {:p}", b, &c); //0x7ffee2fe0624, 0x7ffee2fe0634 //如果不赋值 let c = &*b; // c 也是对 a 的一个引用， 那么 b == c println!<div class=read-more-link><a href=/posts/2021/03_25_rust_deference/>Read More…</a></div></article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/common_issues/>Common_issues</a></h1><time datetime=2021-03-25T09:29:35+0800 class=post-date>Thu, Mar 25, 2021</time>
+docker issue docker version: 20.10.5
+Error [internal] load metadata for
+failed to solve with frontend dockerfile.v0
+solution:
+using DOCKER_BUILDKIT=0 docker build xxxx
+this is docker buildkit bug: https://github.com/moby/buildkit/issues/721</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/linux/2021_03_17_linux_common_command/>Linux 常用命令</a></h1><time datetime=2021-03-17T09:36:21+0800 class=post-date>Wed, Mar 17, 2021</time>
+远程登录
+ssh -v user@host -p 8855 scp -v -P 8855 file user@host:/data/rwkey python3 -m http.server --bind 0.0.0.0 默认端口 8000 开 web 服务 python -m SimpleHTTPServer 8000 & docker 命令
+docker save 127.0.0.1:5001/xxx | gzip > xxx.tgz
+docker push 127.0.0.1:5001/xxx
+docker load &lt; xxx.tgz
+日志从后往前看
+tac log.log | more</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/2021/03_15_redis_commands/>redis 常用命令</a></h1><time datetime=2021-03-15T11:25:58+0800 class=post-date>Mon, Mar 15, 2021</time>
+连接 reids 服务器
+redis-cli -h host -p 6379
+常用命令
+查看过期时间
+ttl whisky:m:rtk:created:M1P31qiwesngwQFth02Bj41s28
+结果 单位是秒
+(integer) 10573</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/2021/03_11_rust_mem_manage/>Rust 内存管理</a></h1><time datetime=2021-03-11T20:55:20+0800 class=post-date>Thu, Mar 11, 2021</time>
+Rust 在编译期间，通过静态分析，确定对象的作用域与生命周期，从而可以确定某个对象不再被使用，将其销毁，并且不会引入任何运行时的开销。
+值类型与引用类型 在 rust 中， 实现 Copy 这个 trait，用来标记一个值类型，另外一种就是数据分配在堆上，实际内容是一个内存地址，指向栈上的实际数据，记住只有堆上的数据才需要进行内存管理。
+copy 语义 默认实现了 Copy 类型的： 整形，浮点型，布尔型，字符型, &T 都是实现了 Copy trait，元组类型，如果元组里面所有类型都实现了 Copy trait，那么这个元组也就实现了 Copyt trait，数组同理
+需要手动实现 Copy 类型的 对于 Rust 结构体，枚举，如果他们内部都实现了 Copy trait，则他们可以手动实现 Copy trait。
+无法实现 Copy 类型 Box 就是无法实现 Copy 类型，原因是因为如果 Box 实现了 Copy，那么就会有多次释放问题，还有可变借用指针类型 &mut T， String, 对于这类可以通过调用 clone 方法解决
+move 语义 赋值，函数传参，返回值，match 这四个操作，如果是针对一个值类型的话，相当于把这个值赋值到目标上，原来值的修改不会影响到新的值。举个例子：
+fn main() { let num1 = 1; let num2 = num1; println!("num1={}, num2={}", num1, num2); } 如果换做是一个引用类型的话，执行上面的操作会怎么样？比如我们用 String 为例：<div class=read-more-link><a href=/posts/2021/03_11_rust_mem_manage/>Read More…</a></div></article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/2021/03_07_huobi_register/>炒币指南</a></h1><time datetime=2021-03-07T16:16:02+0800 class=post-date>Sun, Mar 7, 2021</time>
+炒币操作指南
+一、下载火币软件
+有两种方式
+第一种方法：使用微信扫码注册并下载火币
+第二种方法：使用浏览器打开 https://www.huobi.sh/topic/invited/?invite_code=evea3 网址，注册并下载
+二、打开软件首页，找到快捷买币，选择我要买，然后选择USDT，找到一家商家进行购买USDT，购买完成之后，就可以去交易了
+三、购买问题
+如果购买中间出现问题请加微信：crash_worker，我会手把手教你买卖操作</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/2021/01_07_rust_introduction/>rust 入门</a></h1><time datetime=2021-01-07T17:16:30+0800 class=post-date>Thu, Jan 7, 2021</time>
+Rust 安装
+curl https://sh.rustup.rs -sSf | sh 执行 hello world
+fn main(){ println!("Rust says Hello to TutorialsPoint !!"); }</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/2021/01_06_go_make_vs_new/>2021_01_06_go_make_vs_new</a></h1><time datetime=2021-01-06T15:00:13+0800 class=post-date>Wed, Jan 6, 2021</time>
+https://www.godesignpatterns.com/2014/04/new-vs-make.html
+new: 申请一块内存，返回地址 make: 用来初始化 slice, map, channel, 返回的不是指针，
+func main() { const n = 5 // Start up the goroutines... for i := 0; i &lt; n; i++ { i := i go func() { select { case &lt;-shutdown: done &lt;- i } }() } time.Sleep(2 * time.Second) // Close the channel. All goroutines will immediately "unblock". close(shutdown) for i := 0; i &lt; n; i++ { fmt.<div class=read-more-link><a href=/posts/2021/01_06_go_make_vs_new/>Read More…</a></div></article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/course/20120_12_15_01_course/>20120_12_15_01_course</a></h1><time datetime=2020-12-15T11:02:42+0800 class=post-date>Tue, Dec 15, 2020</time>
+https://www.freeaihub.com/go/index.html
+极客时间课程
+https://d.shikey.com/jike/%E5%B7%B2%E5%AE%8C%E7%BB%93%E7%9A%84%E8%AF%BE%E7%A8%8B/41%20Nginx%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86100%E8%AE%B2/1%20%E7%AC%AC%E4%B8%80%E7%AB%A0%20%E5%88%9D%E8%AF%86Nginx/
+运维书籍
+http://www.itwangqing.net.cn/15309530058499.html</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/tools/proxy_settings/>代理配置</a></h1><time datetime=2020-12-10T15:26:15+0800 class=post-date>Thu, Dec 10, 2020</time>
+Git 代理配置
+配置 git 代理 https://gist.github.com/laispace/666dd7b27e9116faece6
+docker 代理配置 https://note.qidong.name/2020/05/docker-proxy/
+curl 配置代理
+在 ~/.curlrc 文件配置
+socks5 = "127.0.0.1:7890"</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/2020/12_09_01_docker_tutorial/>Docker 入门指南</a></h1><time datetime=2020-12-09T12:07:19+0800 class=post-date>Wed, Dec 9, 2020</time>
+全文较长，大致需要半小时左右时间阅读，若你已经有基础，可以根据自己的了解程度看起。
+本文记录作为一个新手，从 Docker 起步
+Docker 简介
+1.1 Docker 概念 1.2 Docker 与 虚拟机区别 Docker 基本概念
+2.1 核心概念 2.2 Docker 三剑客 其中第一章与第二章非常详细地介绍了 Docker 的相关概念与基本组成，主要是概论介绍等文字描述，第三章与第四章偏重于上手实践，从 Docker 环境安装、运行加速、镜像使用、镜像构成到镜像定制与发布，分解了各步骤的流程，通过教程加注解的形式加深读者印象。其中建立镜像的示例代码可以从
+一、Docker 简介 谈到 Docker，不论我们是否实践过，都应该对它或多或少有一个印象，即“环境一次创建，多端一致性运行”，因为它正解决了曾经困扰我们已久“这段代码在我电脑上运行没问题啊”的烦恼。首先，简单介绍一下 Docker 技术是什么。
+1.1 Docker 概念扫盲：什么是 Docker？ Docker 是一个开放源代码软件项目，项目主要代码在2013年开源于 GitHub。它是云服务技术上的一次创新，让应用程序布署在软件容器下的工作可以自动化进行，借此在 Linux 操作系统上，提供一个额外的软件抽象层，以及操作系统层虚拟化的自动管理机制。
+1.2 Docker 和虚拟机的区别与特点 二、Docker 基本概念 2.1 核心概念：镜像、容器与仓库 Docker 主要包含三个基本概念，分别是镜像、容器和仓库，理解了这三个概念，就理解了 Docker 的整个生命周期。以下简要总结一下这三点，详细介绍可以移步Docker 从入门到实践对应章节。
+2.2 Docker 三剑客</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/2020/11_10_01_go_commands/>Go 常用命令</a></h1><time datetime=2020-11-10T19:19:40+0800 class=post-date>Tue, Nov 10, 2020</time>
+记录下自己常用的几个 Go 命令
+编译源码命令 命令用法 go build [-o output] [-i] [build flags] [packages] 解释： output 就是要输出的文件名, packages 通过 go help packages 可以查看，英文的解释是: Usually, [packages] is a list of import paths, 先不翻译了，详细的通过 go help packages 去了解。
+常用举例 go build -o main github.com/crwkey/common</article><article class=post><h1 class=post-title><a href=https://rwkey.com/misc/tmp/>Misc</a></h1><time datetime=2020-11-10T19:19:40+0800 class=post-date>Tue, Nov 10, 2020</time>
+java 打 jar 插件：
+maven-compiler-plugin
+kerberos authentication
+https://github.com/whg517/blog/blob/master/source/_posts/programming/%E8%BF%9E%E6%8E%A5%E5%B8%A6%E6%9C%89%20Kerberos%20%E8%AE%A4%E8%AF%81%E7%9A%84%20Hadoop%20%20HBase%20Spark.md
+docker 网络
+https://lengrongfu.github.io/2018/11/13/docker-network-beginner/
+nc nmap
+docker-compose 先后启动问题 https://www.cnblogs.com/wang_yb/p/9400291.html
+通过 lua 插入 js
+tcp 转发 noob
+https://github.com/Dennis-Zhang-SH/simplelb/blob/master/simple_load_balance.go
+// grpc https://github.com/Bingjian-Zhu/go-grpc-example
+https://erev0s.com/blog/how-hook-android-native-methods-frida-noob-friendly/
+make vs new
+https://www.godesignpatterns.com/2014/04/new-vs-make.html
+blog
+https://courses.consensys.net/courses/take/bootcamp-basic-training/multimedia/24564917-welcome https://script.money/posts/031-programmer_learn_path/ *
+copilot 配置
+https://github.com/github/copilot-docs/tree/main/docs#getting-started
+android jni 学习
+https://www.jianshu.com/p/b4431ac22ec2
+http://selinux.org/2019/08/20/openstack-tap/</article><article class=post><h1 class=post-title><a href=https://rwkey.com/golang/go_command/></a></h1><time datetime=0001-01-01T00:00:00Z class=post-date>Mon, Jan 1, 0001</time>
+测试命令 /usr/local/Cellar/go/1.16.5/libexec/bin/go tool test2json -t /private/var/folders/n6/w1krkv8n1ws7nx2t0trrxg_r0000gn/T/___Test_makeSalt_in_github_com_servicewall_whisky_pkg_crypto.test -test.v -test.paniconexit0 -test.run ^\QTest_makeSalt\E$</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/language/golang/common_issue/></a></h1><time datetime=0001-01-01T00:00:00Z class=post-date>Mon, Jan 1, 0001</time>
+no copy 问题， 比如 sync.WaitGroup 包含了 noCopy 定义 sync.WaitGroup, 多个 goroutine 同步，但不能通行 sync.Mutex: 对资源上锁 （https://geektutu.com/post/hpg-sync-cond.html） sync.RWMutex 读写锁， sync.Locker sync.once 函数执行一次 .sync.pool 复用对象 sync.cond： 条件变量，配置 sync.Locker 使用，发送信号，其他的根据相应的信号，做相应的操作 sync.Map： 同步 map sync.atomic 原子操作 close chan 可以多次读，不会堵塞，并且返回一个零值（暂且这么认为）</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/language/golang/grpc/></a></h1><time datetime=0001-01-01T00:00:00Z class=post-date>Mon, Jan 1, 0001</time>
+protoc 命令
+protoc -I. --go_out=plugins=grpc,paths=source_relative:. **/*.proto https://blog.csdn.net/winter_wu_1998/article/details/113518602
+https://jishuin.proginn.com/p/763bfbd4ef61</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/language/golang/%E9%9D%A2%E8%AF%95%E9%A2%98/></a></h1><time datetime=0001-01-01T00:00:00Z class=post-date>Mon, Jan 1, 0001</time>
+https://github.com/lifei6671/interview-go/blob/master/question/q001.md</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/language/shell/shell_command/></a></h1><time datetime=0001-01-01T00:00:00Z class=post-date>Mon, Jan 1, 0001</time>
+~/d/p/p/t/pb ❯❯❯ tree . . ├── go.mod ├── hello │ └── proto │ └── user │ └── service.pb.go ├── proto │ ├── article │ │ └── message.proto │ └── user │ ├── message.proto │ └── service.proto └── service.pb.go
+6 directories, 6 files
+查找 所有.go 结尾的文件
+for x in **/*.go do echo $x; done ** : 会匹配所有目录
+*.go 匹配以 go结尾的文件
+**/* 代表递归获取当前目录下所有文件和文件夹
+**/*(.) 只是普通文件 (https://superuser.com/questions/1638522/zsh-and-globstar-to-match-all-files-in-subdirectories-but-not-directories)
+**/*(-.) 包括普通文件和符号链接文件
+注意： * 不包含隐藏文件<div class=read-more-link><a href=/posts/language/shell/shell_command/>Read More…</a></div></article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/linux/backup/></a></h1><time datetime=0001-01-01T00:00:00Z class=post-date>Mon, Jan 1, 0001</time>
+curl x | jq, python fx base64，hash，urlencode，格式化json
+youdao() { w3m -dump &ldquo;https://www.youdao.com/w/$1/#keyfrom=dict2.top" | grep &ldquo;go top&rdquo; -A 200 | tail -n +2 | more }</article><article class=post><h1 class=post-title><a href=https://rwkey.com/posts/linux/linux-shell/></a></h1><time datetime=0001-01-01T00:00:00Z class=post-date>Mon, Jan 1, 0001</time>
+title: &ldquo;Linux 重定向&rdquo; date: 2022-01-09T16:28:21+08:00 draft: false
+bash 解析器工作原理 解释：解析器解析到 &ldquo;&lt;&rdquo; 以后会优先处理重定向，将标准输入重定向 file，然后处理命令剩下的部分</article></div></main><script async src="https://www.googletagmanager.com/gtag/js?id=G-CHP0LWG5GF"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-CHP0LWG5GF")</script></body></html>
