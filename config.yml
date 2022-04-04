@@ -1,0 +1,32 @@
+baseURL: "https://rwkey.com/"
+languageCode: "en-us"
+title: "rwkey"
+theme: "hyde"
+Menus:
+  main:
+    - Name: "Github"
+      URL: "https://github.com/crwkey/"
+params:
+  description: "北漂码农"
+
+markup:
+  highlight:
+    codeFences: true
+    guessSyntax: true
+    hl_Lines: ""
+    lineNoStart: 1
+    lineNos: false
+    lineNumbersInTable: true
+    noClasses: true
+    style: dracula
+    tabWidth: 4
+  goldmark:
+    renderer:
+      unsafe: true
+
+sitemap:
+  changefreq: hourly
+  filename: sitemap.xml
+  priority: 0.5
+
+# googleAnalytics: "G-CHP0LWG5GF"
