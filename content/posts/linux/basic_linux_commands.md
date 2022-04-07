@@ -24,3 +24,9 @@ draft: false
 
 ## 查找字符串
 strings file | grep "rwkey.com"
+
+
+## 查看主机信息
+`hostnamectl`
+`uname -a`
+`uname -r`
