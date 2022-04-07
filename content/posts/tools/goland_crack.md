@@ -1,14 +1,13 @@
 ---
-title: "Goland 破解"
-date: 2020-12-09T17:54:40+08:00
-draft: true 
+title: "Goland 2022.3.4 破解"
+date: 2022-04-09T17:54:40+08:00
+draft: false 
 ---
-操作步骤
 
-官网安装最新 Goland 安装包:
+下面记录下破解过程
 
-https://www.jetbrains.com/go/download/other.html
+1. 破解，先升级 goland，然后删除配置文件
+2. 编辑 goland.vmoptions, 加入加载 jar 文件
+3. 关注公众号获取激活码
 
-下载激活补丁
-
-Link:https://dubox.com/s/1IQeygxnNLG4iN9VM2FgXcw Password:mhjh
+破解教程参考： http://blog.idejihuo.com/topics/jetbrains
