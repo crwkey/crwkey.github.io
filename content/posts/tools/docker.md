@@ -20,3 +20,6 @@ sudo tee /etc/docker/daemon.json <<-'EOF'
 EOF
 sudo systemctl daemon-reload
 sudo systemctl restart docker
+
+3. docker 离线安装  
+https://juejin.cn/post/6967138136975638559  
