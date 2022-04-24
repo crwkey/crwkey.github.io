@@ -1,0 +1,2 @@
+
+etcdctl get
