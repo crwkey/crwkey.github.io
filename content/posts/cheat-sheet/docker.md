@@ -13,4 +13,5 @@ docker system df -- show disk usage
 3. display the running processes of a container  
 docker top xxx o pid,cmd
 
-
+4. get real time events from the server  
+docker events
