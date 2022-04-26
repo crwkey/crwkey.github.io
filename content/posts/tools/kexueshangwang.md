@@ -6,3 +6,4 @@ draft: false
 
 1. https://github.com/lyy289065406/trojan-docker
 2. https://p3terx.com/archives/cheap-and-costeffective-vps-recommended.html
+3. https://linkcube.co/index.php（科学上网）ALIBABAYYDS
