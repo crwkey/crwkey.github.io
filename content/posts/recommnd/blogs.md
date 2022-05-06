@@ -8,3 +8,4 @@ draft: false
 
 1. Rust & C: https://liujiacai.net/blog/2022/04/30/modern-c/
 2. 系统设计： https://blog.bytebytego.com/
+3. 左耳朵耗子： https://coolshell.cn/
