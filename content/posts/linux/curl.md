@@ -24,3 +24,6 @@ curl -L https://www.shenzhenair.com/vodka/v1/dfp/bootstrap.js
 
 // --trace-ascii 获取请求的完整日志
 curl -H 'Content-Type: multipart/form-data' -XPOST http://127.0.0.1:80/mipha/data/dfp/bootstrap.js -d 'tUrH27_4w0w' --trace-ascii dump.log
+
+//性能测试
+curl -o /dev/null -s -w %{time_namelookup}--%{time_connect}--%{time_pretransfer}--%{time_starttransfer}--%{time_total}--%{speed_download}--%{local_ip}--%{http_code}    -H 'sw-api-key:K4aUwcqY*iAnKMCMKAoh2QAZIN7h$x' -XGET 'http://172.31.33.213:9010/antibot/dynamic_config_file'
