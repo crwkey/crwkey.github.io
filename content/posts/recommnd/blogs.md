@@ -10,3 +10,4 @@ draft: false
 2. 系统设计： https://blog.bytebytego.com/
 3. 左耳朵耗子： https://coolshell.cn/
 4. 运维手册学习 http://www.peter-zhou.com/pa-chong/curl-gong-ju.html
+5. golang blog: https://vim0.com/post/golang/use_mock_to_test/
