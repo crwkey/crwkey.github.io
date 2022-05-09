@@ -1,6 +1,6 @@
 ---
 title: "Curl 命令"
-date: 2022-03-25T14:32:56+08:00
+date: 2022-05-09T14:32:56+08:00
 draft: false 
 ---
 
@@ -21,3 +21,6 @@ curl https://www.shenzhenair.com/vodka/v1/dfp/bootstrap.js
 ```
 
 curl -L https://www.shenzhenair.com/vodka/v1/dfp/bootstrap.js 
+
+// --trace-ascii 获取请求的完整日志
+curl -H 'Content-Type: multipart/form-data' -XPOST http://127.0.0.1:80/mipha/data/dfp/bootstrap.js -d 'tUrH27_4w0w' --trace-ascii dump.log
