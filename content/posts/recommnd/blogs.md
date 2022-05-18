@@ -13,3 +13,4 @@ draft: false
 5. golang blog: https://vim0.com/post/golang/use_mock_to_test/
 6. https://cheats.rs/
 7. https://www.xmodulo.com/encrypt-shell-script.html
+8. https://github.com/kettanaito/naming-cheatsheet
