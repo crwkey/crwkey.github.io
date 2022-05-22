@@ -15,3 +15,8 @@ draft: false
 7. https://www.xmodulo.com/encrypt-shell-script.html
 8. https://github.com/kettanaito/naming-cheatsheet
 9. https://doc.rust-lang.org/rust-by-example/scope/lifetime/static_lifetime.html
+
+
+
+http://zzx-blog.com/rust-zhi-trait/
+https://www.bilibili.com/video/BV1RP4y1G7KF?p=4&spm_id_from=pageDriver
