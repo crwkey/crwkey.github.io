@@ -15,6 +15,7 @@ draft: false
 7. https://www.xmodulo.com/encrypt-shell-script.html
 8. https://github.com/kettanaito/naming-cheatsheet
 9. https://doc.rust-lang.org/rust-by-example/scope/lifetime/static_lifetime.html
+10. c++ https://raytracing.github.io/books/RayTracingInOneWeekend.html
 
 
 
