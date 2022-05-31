@@ -16,6 +16,7 @@ draft: false
 8. https://github.com/kettanaito/naming-cheatsheet
 9. https://doc.rust-lang.org/rust-by-example/scope/lifetime/static_lifetime.html
 10. c++ https://raytracing.github.io/books/RayTracingInOneWeekend.html
+11. https://mcll.top/2020/03/10/rust%E4%B8%AD%E5%AE%9E%E7%8E%B0split/
 
 
 
