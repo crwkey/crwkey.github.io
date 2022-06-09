@@ -17,8 +17,8 @@ draft: false
 9. https://doc.rust-lang.org/rust-by-example/scope/lifetime/static_lifetime.html
 10. c++ https://raytracing.github.io/books/RayTracingInOneWeekend.html
 11. https://mcll.top/2020/03/10/rust%E4%B8%AD%E5%AE%9E%E7%8E%B0split/
-
-
+12. https://stdrc.cc/style-guides/markdown
+13. https://github.com/xizhibei/blog/issues/145
 
 http://zzx-blog.com/rust-zhi-trait/
 https://www.bilibili.com/video/BV1RP4y1G7KF?p=4&spm_id_from=pageDriver
