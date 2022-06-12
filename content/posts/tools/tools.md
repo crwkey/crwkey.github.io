@@ -1,6 +1,6 @@
 ---
 title: "常用开发工具"
-date: 2022-05-31T12:26:08+08:00
+date: 2022-06-02T12:26:08+08:00
 draft: false 
 ---
 ## 网络相关
@@ -26,6 +26,9 @@ draft: false
 
 6. 命名神器  
    * https://unbug.github.io/codelf/
+
+7. 代码分享工具
+   carbon.now.sh
 
 
 ## 画图相关
