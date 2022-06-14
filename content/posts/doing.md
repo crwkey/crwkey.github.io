@@ -9,3 +9,5 @@ draft: false
 3. 30 days of js: https://github.com/Asabeneh/30-Days-Of-JavaScript
 4. cmake https://sfumecjf.github.io/cmake-examples-Chinese/
 5. wasm
+6. https://github.com/geektutu/7days-golang
+7. https://geektutu.com/post/quick-go-context.html
