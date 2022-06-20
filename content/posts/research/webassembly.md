@@ -14,3 +14,7 @@ https://docs.wasmer.io/integrations/go/setup
 
 3. go wasmer
 https://pkg.go.dev/github.com/wasmerio/wasmer-go/wasmer
+
+
+
+https://blog.logrocket.com/webassembly-runtimes-compared/
