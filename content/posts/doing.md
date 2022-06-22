@@ -18,3 +18,4 @@ draft: false
 https://www.bilibili.com/video/BV1Cm4y1d7Ur/?spm_id_from=333.788&vd_source=ff2a63474ee3417fceb31c73326ca7b8
 
 2. 数据结构与算法
+https://www.bilibili.com/video/BV13g41157hK?spm_id_from=333.337.search-card.all.click&vd_source=ff2a63474ee3417fceb31c73326ca7b8
