@@ -13,4 +13,3 @@ draft: false
 
 3. 使用 dlv debug test
 `dlv test tequila/etl -- -test.run TestWriteReqChannel2CH`
-
