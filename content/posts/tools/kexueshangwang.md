@@ -1,7 +1,7 @@
 ---
 title: "科学上网"
 date: 2022-05-04T20:30:27+08:00
-draft: false
+draft: true 
 ---
 推荐机场：
 https://linkcube.co/aff.php?aff=267
