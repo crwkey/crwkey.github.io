@@ -19,5 +19,7 @@ centos8 install glibc-static 命令
 sudo  dnf install glibc-static
 ```
 gdb
+starti
+
 info inferiors
 
