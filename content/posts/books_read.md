@@ -1,7 +1,7 @@
 ---
 title: "作者已读书籍"
-date: 2022-12-21T14:53:27+08:00
-draft: true 
+date: 2022-06-21T14:53:27+08:00
+draft: false 
 ---
 1. rust 简单教程
 
@@ -15,4 +15,8 @@ https://github.com/Vonng/ddia(数据密集型应用系统设计)
 
 https://github.com/izackwu/TeachYourselfCS-CN/blob/master/TeachYourselfCS-CN.md
 
+
+1. 优秀公众号
+
+https://mp.weixin.qq.com/s/TwDiDmApmsIVSIFh2h1osQ
 
