@@ -1,0 +1,13 @@
+https 证书研究
+
+https://developer.android.com/training/articles/security-ssl
+
+centos8 python3 安装
+https://computingforgeeks.com/install-latest-python-on-centos-linux/
+https://www.vultr.com/docs/update-python3-on-centos/
+
+sudo make altinstall
+
+sudo alternatives --install /usr/bin/python python3 /usr/local/bin/python3.9 1 
+
+alternatives --install /usr/bin/pip pip /usr/local/bin/pip3.9 1
