@@ -7,6 +7,13 @@ draft: false
 1. adb 连接夜神模拟器  
 `adb connect 127.0.0.1:62001`
 
+
 2. adb shell dumpsys activity top
 
 3. adb shell dumpsys package ai.servicewall.sdk.dev
+
+4. adb devices
+
+启动一个 Activity
+
+5. adb shell am start ai.servicewall.sdk.dev/ai.servicewall.sdk.sample.HomeActivity
