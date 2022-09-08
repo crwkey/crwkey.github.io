@@ -23,3 +23,5 @@ starti
 
 info inferiors
 
+GUN C 手册 https://www.cyberciti.biz/files/GNU-C-Language-Manual/
+
