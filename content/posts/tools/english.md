@@ -5,3 +5,5 @@ draft: false
 ---
 
 1. https://qwerty.kaiyi.cool/ (背单词)
+
+2. 彩云小译

@@ -38,3 +38,18 @@ adb shell setenforce 1   //设置后即Enforcing
 
 // 查看 android api levels 列表
 https://apilevels.com/
+
+// android 源码
+https://cs.android.com/android/platform/superproject/+/master:bionic/linker/linker_main.cpp;l=352
+
+http://aospxref.com/
+
+http://aosp.opersys.com/#
+
+
+
+adb uninstall ai.servicewall.sdk.dev
+
+adb shell am start ai.servicewall.sdk.dev/ai.servicewall.sdk.sample.HomeActivity
+
+./gradlew assembleDebug installDebug

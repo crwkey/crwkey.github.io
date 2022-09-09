@@ -15,7 +15,7 @@ C 静态编译依赖 glibc-static
 
 centos8 install glibc-static 命令
 
-```
+```q
 sudo  dnf install glibc-static
 ```
 gdb
