@@ -53,3 +53,7 @@ adb uninstall ai.servicewall.sdk.dev
 adb shell am start ai.servicewall.sdk.dev/ai.servicewall.sdk.sample.HomeActivity
 
 ./gradlew assembleDebug installDebug
+
+刷机
+
+https://blog.csdn.net/csdn546229768/article/details/120355818
