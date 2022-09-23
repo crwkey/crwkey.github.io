@@ -8,3 +8,5 @@ macos 打开任何来源这个选项
 sudo spctl --master-disable
 ```
 
+// android 投屏工具 https://github.com/Genymobile/scrcpy
+brew install scrcpy

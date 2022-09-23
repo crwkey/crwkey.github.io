@@ -44,3 +44,5 @@ draft: false
 6. markdown （https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716） ascii tree，ascii table
 7. https://www.websequencediagrams.com/#
 
+## 局域网
+Tailscale
