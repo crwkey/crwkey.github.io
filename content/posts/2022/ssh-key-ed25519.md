@@ -21,7 +21,7 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJiBDp6+mQdh9Nn8lYbj3m71IplIyPXYyHb6npi07wWc
 
 另外像最新的 ubuntu 系统已经默认开始启用 `ed25519` 算法，要使用之前的 RSA 配置需要额外配置。
 
-## 给服务器替换 ed25519 公钥
+## 给服务器替换 ed25519 公钥操作
 在操作之前，建议把之前的公钥私钥都提前备份下，以免误操作 
 
 1. 第一步是在本地生成 `ed25519` 密钥对, 通过命令行执行 `ssh-keygen -t ed25519 -C "cn.dev4linux@gmail.com"`, 然后一路回车就行, 最后会在 `$HOME/.ssh` 目录下生成 `id_ed25519.pub` 公钥文件
@@ -29,5 +29,5 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJiBDp6+mQdh9Nn8lYbj3m71IplIyPXYyHb6npi07wWc
 
 3. 把之前使用的 `.id_rsa` 私钥备份或删除
 
-## 给 github 替换 ed25519 公钥
+## 给 github 替换 ed25519 公钥操作
 同样拷贝上面生成的的 `ed25519` 公钥内容，将其复制到 github 公钥账户设置下面，然后使用 `ssh -T git@github.com` 连接成功，说明新的公钥设置成功。
