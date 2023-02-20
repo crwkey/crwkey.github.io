@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>clojure on rwkey</title><link>https://rwkey.com/tags/clojure/</link><description>Recent content in clojure on rwkey</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 11 Dec 2019 15:48:43 +0000</lastBuildDate><atom:link href="https://rwkey.com/tags/clojure/index.xml" rel="self" type="application/rss+xml"/><item><title>clojure 入门</title><link>https://rwkey.com/posts/old/clojure-%E5%85%A5%E9%97%A8/</link><pubDate>Wed, 11 Dec 2019 15:48:43 +0000</pubDate><guid>https://rwkey.com/posts/old/clojure-%E5%85%A5%E9%97%A8/</guid><description>安装
+brew install leiningen
+tldr lein
+lein repl
+lein new hello-world
+(ns hello-world.core) (defn -main [&amp;amp; args] (println &amp;#34;Hello world&amp;#34;)) lein run</description></item></channel></rss>

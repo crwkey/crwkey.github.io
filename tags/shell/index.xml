@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>shell on rwkey</title><link>https://rwkey.com/tags/shell/</link><description>Recent content in shell on rwkey</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 30 Nov 2019 12:14:29 +0000</lastBuildDate><atom:link href="https://rwkey.com/tags/shell/index.xml" rel="self" type="application/rss+xml"/><item><title>Linux Shell 快速入门</title><link>https://rwkey.com/posts/old/linux-shell-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</link><pubDate>Sat, 30 Nov 2019 12:14:29 +0000</pubDate><guid>https://rwkey.com/posts/old/linux-shell-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</guid><description>本文主要介绍 Linux Shell 编程相关基础知识，可以让初学者快速入门，内容主要包含以下几个方面：
+Shell 脚本概述 Shell 脚本运行与调试 Shell 如何定义变量 Shell 表达式 Shell 流程控制 Shell 函数
+Shell 脚本概述 Shell 脚本是一门简单的脚本语言，主要由 Shell 基本语法 + Linux 命令 组成，所以说要写好 Shell 脚本，必须掌握好一些重要的 Linux 命令。 下面是一个最简单的 Shell 脚本内容，我们可以将其保存在一个test.sh 文件中
+#!/bin/bash # This is a output string `https://dev4mobiles.com` echo &amp;#34;https://dev4mobiles.com&amp;#34; 第一行 #! 是约定标记，英文读作shell bang，后面的 /bin/bash 指定了脚本需要哪种解释器来解释, 本文使用了常用 bash 解释器。 第二行 以 # 开头的行就是注释，会被解释器忽略 第三行 功能是向命令行输出字符串，字符串一般用双引号引起来
+Shell 运行与调试 Shell 脚本的执行是解释执行的，也就是说边解释边执行
+运行 运行方式有两种:
+作为可执行程序 chmod u+x test.sh ./test.sh 首先需要给文件 test.</description></item></channel></rss>

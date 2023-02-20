@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux on rwkey</title><link>https://rwkey.com/tags/linux/</link><description>Recent content in Linux on rwkey</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 07 Dec 2019 14:58:54 +0000</lastBuildDate><atom:link href="https://rwkey.com/tags/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>Linux 常用命令</title><link>https://rwkey.com/posts/old/linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link><pubDate>Sat, 07 Dec 2019 14:58:54 +0000</pubDate><guid>https://rwkey.com/posts/old/linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid><description>防火墙知识点:
+添加访问端口号: firewall-cmd &amp;ndash;zone=public &amp;ndash;add-port=6379/tcp &amp;ndash;permanent
+列出可访问的端口 firewall-cmd &amp;ndash;list-ports
+使配置生效 firewall-cmd &amp;ndash;reload
+查看状态： firewall-cmd &amp;ndash;state
+禁用防火墙: sudo systemctl stop firewalld
+ps -ef | grep redis
+查看程序运行端口 netstat -nl | grep 61616
+解压命令到某个具体目录
+tar -zxvf xx.tar.gz -C xxx
+查询文件包含指定字符串 grep -i &amp;ldquo;mystring&amp;rdquo; /tmp/myfile, 其中 i 代表忽略大小写</description></item></channel></rss>

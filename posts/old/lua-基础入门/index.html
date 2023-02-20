@@ -1,0 +1,100 @@
+<!doctype html><html xmlns=http://www.w3.org/1999/xhtml xml:lang=en-us lang=en-us><head><link href=https://gmpg.org/xfn/11 rel=profile><meta charset=utf-8><meta name=generator content="Hugo 0.110.0"><meta name=viewport content="width=device-width,initial-scale=1"><script async src="https://www.googletagmanager.com/gtag/js?id=G-CHP0LWG5GF"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-CHP0LWG5GF")</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2009162505910536" crossorigin=anonymous></script><title>Lua 基础入门 &#183; rwkey</title><meta name=description content><link type=text/css rel=stylesheet href=https://rwkey.com/css/print.css media=print><link type=text/css rel=stylesheet href=https://rwkey.com/css/poole.css><link type=text/css rel=stylesheet href=https://rwkey.com/css/syntax.css><link type=text/css rel=stylesheet href=https://rwkey.com/css/hyde.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700"><link rel=apple-touch-icon-precomposed sizes=144x144 href=/apple-touch-icon-144-precomposed.png><link rel="shortcut icon" href=/favicon.png></head><body><aside class=sidebar><div class="container sidebar-sticky"><div class=sidebar-about><a href=https://rwkey.com/><h1>rwkey</h1></a><p class=lead>北漂码农</p></div><nav><ul class=sidebar-nav><li><a href=https://rwkey.com/>Home</a></li><li><a href=https://github.com/crwkey/>Github</a></li></ul></nav><p>&copy; 2023. All rights reserved.</p></div></aside><main class="content container"><div class=post><h1>Lua 基础入门</h1><time datetime=2019-11-28T10:10:29Z class=post-date>Thu, Nov 28, 2019</time><h1 id=学习-lua-的必要性>学习 Lua 的必要性</h1><p>因为工作中经常与 <code>nginx</code> 打交道，而 <code>nginx</code> 又有大量的模块是由 <code>Lua</code> 写的，所以有必要学习下 <code>Lua</code> 基础的语法知识。<code>Lua</code> 作为一门动态脚本语言，解释执行，和 <code>JavaScript</code> 有点相似。</p><h2 id=语言特点>语言特点</h2><ol><li>语句结束没有分号</li><li>跟 <code>JavaScript</code> 很像</li><li>默认定义的是全局变量，定义局部变量需要加 <code>local</code> 关键字</li><li>数组索引从1开始</li><li>没有 <code>i++</code> 操作符号，只能 <code>i = i + 1</code></li></ol><h2 id=注释>注释</h2><ol><li>单行注释<br><code>--</code> 注释内容</li><li>多行注释
+<code>--[[</code>
+注释内容
+<code>]]--</code></li></ol><h2 id=内置数据类型>内置数据类型</h2><p>总共有6种内置数据类型， 其中包括nil, boolean, number, string, table, function</p><ol><li><p><code>nil</code>
+通常是没有赋值，直接使用才会是这个值, 比如说下面的代码直接打印 变量 <code>name</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span>   print(name)
+</span></span></code></pre></div><p>在 <code>ifelse</code> 判断语句中，nil 被当成false 分支，但 <code>nil ~= false</code>, 在 Lua 语言当中，不等于使用 <code>~=</code> 来表示, 而不是我们常见的 <code>!=</code> 。</p></li><li><p><code>boolean</code>
+有两种取值：true, false</p></li><li><p><code>number</code>
+所有的数值类型都使用 <code>number</code> 来表示，不管是整数，还是浮点数，其实内部的存储方式是双精度类型。</p></li><li><p><code>string</code>
+字符串可以用双引号，也可以用单引号包围起来，特殊字符需要转义</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span>name <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;dev4mobile&#34;</span>
+</span></span><span style=display:flex><span>name <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#39;dev4mobile&#39;</span>
+</span></span><span style=display:flex><span>nameWithAge <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#39;dev4mobile </span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c> 25&#39;</span>
+</span></span></code></pre></div><p>多行字符串</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span> welcome <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>[[
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>   hello world
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c> ]]</span>
+</span></span></code></pre></div></li><li><p><code>table</code>
+其实就是其它语言里面的对象， 有两种表现方式，一种是数组，一种是字典(Map)，
+都是使用大括号括起来的。记住数组索引从1开始。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span> arr <span style=color:#ff79c6>=</span> { <span style=color:#bd93f9>1</span>, <span style=color:#f1fa8c>&#34;dev4mobile&#34;</span>, <span style=color:#f1fa8c>&#39;cn.dev4mobile@gamil.com&#39;</span>, <span style=color:#bd93f9>12.3</span>, <span style=color:#ff79c6>function</span>()endv}
+</span></span><span style=display:flex><span> person <span style=color:#ff79c6>=</span> { name <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#39;dev4mobile&#39;</span> }
+</span></span></code></pre></div></li><li><p><code>function</code>
+定义如下，以 <code>function </code>关键字作为开头，<code>add</code> 是函数名字</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span><span style=color:#6272a4>-- 一般定义</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span> <span style=color:#50fa7b>add</span>(a, b)
+</span></span><span style=display:flex><span>   <span style=color:#ff79c6>return</span> a <span style=color:#ff79c6>+</span> b
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>-- 传递多个参数</span>
+</span></span><span style=display:flex><span>funcation print(...)
+</span></span><span style=display:flex><span>  print(...)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>-- 返回多个参数</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span>()
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>return</span> <span style=color:#f1fa8c>&#34;abc&#34;</span>, <span style=color:#bd93f9>12</span>, <span style=color:#ff79c6>function</span>() <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span></code></pre></div></li></ol><h2 id=控制流语句>控制流语句</h2><ol><li>循环
+循环有3种写法，for， while，repeat .. until
+说明： <code>#变量名</code> 表示读取变量的长度，可以是字符串和数组<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span>  <span style=color:#6272a4>-- for 循环</span>
+</span></span><span style=display:flex><span>	arr <span style=color:#ff79c6>=</span> { <span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>2</span>, <span style=color:#bd93f9>3</span>, <span style=color:#bd93f9>4</span>, <span style=color:#bd93f9>5</span> }
+</span></span><span style=display:flex><span>	<span style=color:#ff79c6>for</span> i<span style=color:#ff79c6>=</span><span style=color:#bd93f9>1</span>, <span style=color:#ff79c6>#</span>arr <span style=color:#ff79c6>do</span>  <span style=color:#6272a4>-- 索引从1开始</span>
+</span></span><span style=display:flex><span>	  print(arr[i])
+</span></span><span style=display:flex><span>	<span style=color:#ff79c6>end</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span><span style=color:#6272a4>-- while 循环</span>
+</span></span><span style=display:flex><span>  arr <span style=color:#ff79c6>=</span> { <span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>2</span>, <span style=color:#bd93f9>3</span>, <span style=color:#bd93f9>4</span>, <span style=color:#bd93f9>5</span> }
+</span></span><span style=display:flex><span>  i <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>while</span> i <span style=color:#ff79c6>&lt;=</span> <span style=color:#ff79c6>#</span>arr <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>    print(arr[i])
+</span></span><span style=display:flex><span>    i <span style=color:#ff79c6>=</span> i <span style=color:#ff79c6>+</span> <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span><span style=color:#6272a4>-- repeate until 循环</span>
+</span></span><span style=display:flex><span>arr <span style=color:#ff79c6>=</span> { <span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>2</span>, <span style=color:#bd93f9>3</span>, <span style=color:#bd93f9>4</span>, <span style=color:#bd93f9>5</span> }
+</span></span><span style=display:flex><span>i <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>repeat</span>
+</span></span><span style=display:flex><span>		print(arr[i])
+</span></span><span style=display:flex><span>		i <span style=color:#ff79c6>=</span> i <span style=color:#ff79c6>+</span> <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>until</span> i <span style=color:#ff79c6>&gt;=</span> <span style=color:#ff79c6>#</span>arr
+</span></span></code></pre></div></li><li>分支 ( ifelse )</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span>name <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;dev4mobile&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>if</span> <span style=color:#ff79c6>#</span>name <span style=color:#ff79c6>&gt;</span> <span style=color:#bd93f9>10</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>  print(<span style=color:#f1fa8c>&#34;name length = &#34;</span><span style=color:#ff79c6>..</span> <span style=color:#ff79c6>#</span>name)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>elseif</span> <span style=color:#ff79c6>#</span>name <span style=color:#ff79c6>&gt;</span><span style=color:#bd93f9>5</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>   print(<span style=color:#f1fa8c>&#34;name length &gt; 5, real length = &#34;</span><span style=color:#ff79c6>..#</span>name)    <span style=color:#6272a4>-- 两个点..代表字符串?</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>else</span> 
+</span></span><span style=display:flex><span>  print(<span style=color:#f1fa8c>&#34;name length &lt; &#34;</span><span style=color:#ff79c6>..#</span>name)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span></code></pre></div><h2 id=面向对象>面向对象</h2><p>实现原理：有点类似 <code>JavaScript</code> 的实现使用原型方式，使用<code>函数 + table</code> 实现。</p><ul><li>模块
+在写demo之前有必要先介绍下模块的概念，一般来说一个文件就是一个模块，跟 <code>JavaScript</code> 一样， 导入模块关键字 <code>require</code>, 导出模块关键字<code>return</code>
+下面我们来新建一个模块名
+首先新建一个文件名： perosn.lua，输入下面代码<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span><span style=color:#6272a4>-- 定义模块</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>-- 解释器</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>#</span>!<span style=color:#ff79c6>/</span>usr<span style=color:#ff79c6>/</span><span style=color:#8be9fd;font-style:italic>local</span><span style=color:#ff79c6>/</span>bin<span style=color:#ff79c6>/</span>lua
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>local</span> Person <span style=color:#ff79c6>=</span> {}
+</span></span><span style=display:flex><span><span style=color:#6272a4>-- 导出模块名，类似JavaScript中的export</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>return</span> Person 
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span><span style=color:#6272a4>-- 导入模块</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>-- 解释器</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>#</span>!<span style=color:#ff79c6>/</span>usr<span style=color:#ff79c6>/</span><span style=color:#8be9fd;font-style:italic>local</span><span style=color:#ff79c6>/</span>bin<span style=color:#ff79c6>/</span>lua
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>local</span> perosn <span style=color:#ff79c6>=</span> require(<span style=color:#f1fa8c>&#39;person&#39;</span>)
+</span></span></code></pre></div></li><li>构造对象
+首先新建一个文件名： perosn.lua，输入下面代码</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span>	<span style=color:#6272a4>-- 定义模块</span>
+</span></span><span style=display:flex><span>	<span style=color:#6272a4>-- 解释器</span>
+</span></span><span style=display:flex><span>	<span style=color:#ff79c6>#</span>!<span style=color:#ff79c6>/</span>usr<span style=color:#ff79c6>/</span><span style=color:#8be9fd;font-style:italic>local</span><span style=color:#ff79c6>/</span>bin<span style=color:#ff79c6>/</span>lua
+</span></span><span style=display:flex><span>	<span style=color:#8be9fd;font-style:italic>local</span> Person <span style=color:#ff79c6>=</span> {}
+</span></span><span style=display:flex><span>	<span style=color:#6272a4>-- 定义构造函数</span>
+</span></span><span style=display:flex><span>	<span style=color:#ff79c6>function</span> <span style=color:#50fa7b>Person</span>:<span style=color:#50fa7b>new</span>(name, age)
+</span></span><span style=display:flex><span>	   <span style=color:#6272a4>-- __index 指向 父类 table</span>
+</span></span><span style=display:flex><span>	   <span style=color:#6272a4>-- setmetatable 关联了 新创建的对象 { name = name, age = age } 与 Person 对象</span>
+</span></span><span style=display:flex><span>	  <span style=color:#ff79c6>return</span> setmetatable({ name <span style=color:#ff79c6>=</span> name, age <span style=color:#ff79c6>=</span> age }, { __index <span style=color:#ff79c6>=</span> Person })
+</span></span><span style=display:flex><span>	 <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>	<span style=color:#ff79c6>function</span> <span style=color:#50fa7b>Person</span>:<span style=color:#50fa7b>toString</span>() 
+</span></span><span style=display:flex><span>		print(<span style=color:#f1fa8c>&#39;name=&#39;</span><span style=color:#ff79c6>..</span>self.name<span style=color:#ff79c6>..</span><span style=color:#f1fa8c>&#39;, age=&#39;</span><span style=color:#ff79c6>..</span>self.age)
+</span></span><span style=display:flex><span>	<span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>	<span style=color:#6272a4>-- 导出模块名，类似JavaScript中的export</span>
+</span></span><span style=display:flex><span>	<span style=color:#ff79c6>return</span> Person 
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span>	<span style=color:#6272a4>-- 导入模块</span>
+</span></span><span style=display:flex><span>	<span style=color:#6272a4>-- 解释器</span>
+</span></span><span style=display:flex><span>	<span style=color:#ff79c6>#</span>!<span style=color:#ff79c6>/</span>usr<span style=color:#ff79c6>/</span><span style=color:#8be9fd;font-style:italic>local</span><span style=color:#ff79c6>/</span>bin<span style=color:#ff79c6>/</span>lua
+</span></span><span style=display:flex><span>	<span style=color:#8be9fd;font-style:italic>local</span> Perosn <span style=color:#ff79c6>=</span> require(<span style=color:#f1fa8c>&#39;person&#39;</span>)
+</span></span><span style=display:flex><span>	<span style=color:#6272a4>-- 调用构造函数</span>
+</span></span><span style=display:flex><span>	<span style=color:#8be9fd;font-style:italic>local</span> person <span style=color:#ff79c6>=</span> Person:new(<span style=color:#f1fa8c>&#34;dev4mobile&#34;</span>, <span style=color:#bd93f9>21</span>)
+</span></span><span style=display:flex><span>	<span style=color:#6272a4>-- 调用对象的toString方法, 这个方法是父类方法，需要我们setmetatable来绑定，也就是我们定义对象时 setmetatable({ name = name, age = age }, { __index = Person }) 来绑定的</span>
+</span></span><span style=display:flex><span>	person.toString()
+</span></span></code></pre></div></div></main><script async src="https://www.googletagmanager.com/gtag/js?id=G-CHP0LWG5GF"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-CHP0LWG5GF")</script></body></html>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>json on rwkey</title><link>https://rwkey.com/tags/json/</link><description>Recent content in json on rwkey</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 01 Dec 2019 13:42:29 +0000</lastBuildDate><atom:link href="https://rwkey.com/tags/json/index.xml" rel="self" type="application/rss+xml"/><item><title>如何在命令行里格式化JSON</title><link>https://rwkey.com/posts/old/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E9%87%8C%E6%A0%BC%E5%BC%8F%E5%8C%96json/</link><pubDate>Sun, 01 Dec 2019 13:42:29 +0000</pubDate><guid>https://rwkey.com/posts/old/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E9%87%8C%E6%A0%BC%E5%BC%8F%E5%8C%96json/</guid><description>身为一名软件工程师，我们经常需要在命令行里面优雅的显示 JSON，那么如何做呢？
+有两种比较简单的方式可以从命令行漂亮的打印 JSON 字符串，第一种使用python，另外一种就是使用 jq 命令。
+使用 python 用法：
+input | python -mjson.tool input 作为json输入流，经过管道，最后使用 python -mjson.tool 处理
+Example 1:
+echo &amp;#39;{&amp;#34;perso&amp;#34;:{&amp;#34;name&amp;#34;: &amp;#34;dev4mobile&amp;#34;}}&amp;#39; | python -mjson.tool Output:
+{ &amp;#34;perso&amp;#34;: { &amp;#34;name&amp;#34;: &amp;#34;dev4mobile&amp;#34; } } Example 2:
+curl http://127.0.0.1:8080 | python -mjson.tool Output:
+{ &amp;#34;timestamp&amp;#34;: &amp;#34;2019-12-01T06:01:46.993+0000&amp;#34;, &amp;#34;status&amp;#34;: 404, &amp;#34;error&amp;#34;: &amp;#34;Not Found&amp;#34;, &amp;#34;message&amp;#34;: &amp;#34;No message available&amp;#34;, &amp;#34;path&amp;#34;: &amp;#34;/&amp;#34; } 上边是常用的两个例子
+使用 jq 命令 安装 jq
+mac os 平台 brew install jq Ubuntu 平台 sudo apt-get install jq 用法：</description></item></channel></rss>

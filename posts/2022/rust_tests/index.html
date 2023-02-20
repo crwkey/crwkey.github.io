@@ -1,0 +1,26 @@
+<!doctype html><html xmlns=http://www.w3.org/1999/xhtml xml:lang=en-us lang=en-us><head><link href=https://gmpg.org/xfn/11 rel=profile><meta charset=utf-8><meta name=generator content="Hugo 0.110.0"><meta name=viewport content="width=device-width,initial-scale=1"><script async src="https://www.googletagmanager.com/gtag/js?id=G-CHP0LWG5GF"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-CHP0LWG5GF")</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2009162505910536" crossorigin=anonymous></script><title>Rust 如何编写测试 &#183; rwkey</title><meta name=description content><link type=text/css rel=stylesheet href=https://rwkey.com/css/print.css media=print><link type=text/css rel=stylesheet href=https://rwkey.com/css/poole.css><link type=text/css rel=stylesheet href=https://rwkey.com/css/syntax.css><link type=text/css rel=stylesheet href=https://rwkey.com/css/hyde.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700"><link rel=apple-touch-icon-precomposed sizes=144x144 href=/apple-touch-icon-144-precomposed.png><link rel="shortcut icon" href=/favicon.png></head><body><aside class=sidebar><div class="container sidebar-sticky"><div class=sidebar-about><a href=https://rwkey.com/><h1>rwkey</h1></a><p class=lead>北漂码农</p></div><nav><ul class=sidebar-nav><li><a href=https://rwkey.com/>Home</a></li><li><a href=https://github.com/crwkey/>Github</a></li></ul></nav><p>&copy; 2023. All rights reserved.</p></div></aside><main class="content container"><div class=post><h1>Rust 如何编写测试</h1><time datetime=2022-02-03T10:58:48+0800 class=post-date>Thu, Feb 3, 2022</time><p>原理：执行 cargo test 会生成二进制文件 -> 入口函数 -> 生成 main 函数, main 函数里包含 (#[test], + tests 目录下 + 注释下测试)，其中 tests 目录，会执行集成测试
+默人是并行运行，起很多线程并行运行每个测试
+如果想要串行运行： cargo test &ndash;thread_num=1
+背后其实是执行命令：
+rustc &ndash;test src/lib.rs 告诉 rustc 生成一个运行所有单元测试的二进制文件, (启用 cfg, 放入 main 函数)</p><p>cargo test RUST_TEST_THREADS=1</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#ff79c6>fn</span> <span style=color:#50fa7b>sum</span>(a: <span style=color:#8be9fd>i8</span>, b: <span style=color:#8be9fd>i8</span>) -&gt; <span style=color:#8be9fd>i8</span> {
+</span></span><span style=display:flex><span>	a <span style=color:#ff79c6>+</span> b
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>#[cfg(test)]</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>mod</span> tests {
+</span></span><span style=display:flex><span>	<span style=color:#ff79c6>use</span> <span style=color:#ff79c6>super</span>::<span style=color:#ff79c6>*</span>;
+</span></span><span style=display:flex><span>	<span style=color:#ff79c6>#[test]</span>
+</span></span><span style=display:flex><span>	<span style=color:#ff79c6>#[ignore]</span>
+</span></span><span style=display:flex><span>	<span style=color:#ff79c6>fn</span> <span style=color:#50fa7b>it_works</span>() {
+</span></span><span style=display:flex><span>		assert_eq!(<span style=color:#ff79c6>crate</span>::sum(<span style=color:#bd93f9>2</span>, <span style=color:#bd93f9>2</span>), <span style=color:#bd93f9>4</span>);		
+</span></span><span style=display:flex><span>	}	
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>执行忽略测试
+<code>cargo test -- --ignored</code></p><p>集成测试： 测试被测试的代码能够一起工作, 平行于 src 目录，也就是黑盒测试
+tests 目录下的每一个文件都是一个独立的 crate</p><p>如果项目是binary crate, 只含有 src/main.rs, src/lib.rs(因为它就是 crate)</p><p>编写可测试 —> 反过来推动我们编写测试
+//src/main.rs -> 只会存在几行代码 -> src/lib.rs 里面的方法
+所有的核心代码都存放在 src/lib.rs
+// 方便进行集成测试</p><p>//单元测试 + 集成测试 , src/main.rs 只有几行</p><p>//单元测试 -> 促使我们写出可测试代码（简洁的代码）</p><p>基准测试（性能测试）</p><p>Mock 测试
+Fuzzing 测试</p><ol><li>什么是 Mock？打脏</li></ol><p>外部接口没有准备好，需要 mock, 一般需要通过 trait</p><p>mockall 依赖</p></div></main><script async src="https://www.googletagmanager.com/gtag/js?id=G-CHP0LWG5GF"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-CHP0LWG5GF")</script></body></html>

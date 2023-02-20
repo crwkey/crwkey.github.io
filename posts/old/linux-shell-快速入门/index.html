@@ -1,0 +1,142 @@
+<!doctype html><html xmlns=http://www.w3.org/1999/xhtml xml:lang=en-us lang=en-us><head><link href=https://gmpg.org/xfn/11 rel=profile><meta charset=utf-8><meta name=generator content="Hugo 0.110.0"><meta name=viewport content="width=device-width,initial-scale=1"><script async src="https://www.googletagmanager.com/gtag/js?id=G-CHP0LWG5GF"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-CHP0LWG5GF")</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2009162505910536" crossorigin=anonymous></script><title>Linux Shell 快速入门 &#183; rwkey</title><meta name=description content><link type=text/css rel=stylesheet href=https://rwkey.com/css/print.css media=print><link type=text/css rel=stylesheet href=https://rwkey.com/css/poole.css><link type=text/css rel=stylesheet href=https://rwkey.com/css/syntax.css><link type=text/css rel=stylesheet href=https://rwkey.com/css/hyde.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700"><link rel=apple-touch-icon-precomposed sizes=144x144 href=/apple-touch-icon-144-precomposed.png><link rel="shortcut icon" href=/favicon.png></head><body><aside class=sidebar><div class="container sidebar-sticky"><div class=sidebar-about><a href=https://rwkey.com/><h1>rwkey</h1></a><p class=lead>北漂码农</p></div><nav><ul class=sidebar-nav><li><a href=https://rwkey.com/>Home</a></li><li><a href=https://github.com/crwkey/>Github</a></li></ul></nav><p>&copy; 2023. All rights reserved.</p></div></aside><main class="content container"><div class=post><h1>Linux Shell 快速入门</h1><time datetime=2019-11-30T12:14:29Z class=post-date>Sat, Nov 30, 2019</time><p>本文主要介绍 <code>Linux Shell</code> 编程相关基础知识，可以让初学者快速入门，内容主要包含以下几个方面：</p><blockquote><p>Shell 脚本概述
+Shell 脚本运行与调试
+Shell 如何定义变量
+Shell 表达式
+Shell 流程控制
+Shell 函数</p></blockquote><h2 id=shell-脚本概述>Shell 脚本概述</h2><p><code>Shell</code> 脚本是一门简单的脚本语言，主要由 <code>Shell 基本语法</code> + <code>Linux 命令</code> 组成，所以说要写好 <code>Shell</code> 脚本，必须掌握好一些重要的 <code>Linux 命令</code>。
+下面是一个最简单的 <code>Shell</code> 脚本内容，我们可以将其保存在一个<code>test.sh</code> 文件中</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>  <span style=color:#6272a4>#!/bin/bash</span>
+</span></span><span style=display:flex><span>  <span style=color:#6272a4># This is a output string `https://dev4mobiles.com`</span>
+</span></span><span style=display:flex><span>  <span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#f1fa8c>&#34;https://dev4mobiles.com&#34;</span>
+</span></span></code></pre></div><p>第一行 <code>#!</code> 是约定标记，英文读作<code>shell bang</code>，后面的 <code>/bin/bash</code> 指定了脚本需要哪种解释器来解释, 本文使用了常用 <code>bash</code> 解释器。
+第二行 以 <code>#</code> 开头的行就是注释，会被解释器忽略
+第三行 功能是向命令行输出字符串，字符串一般用双引号引起来</p><h2 id=shell-运行与调试>Shell 运行与调试</h2><p><code>Shell</code> 脚本的执行是解释执行的，也就是说边解释边执行</p><h3 id=运行>运行</h3><p>运行方式有两种:</p><ol><li>作为可执行程序</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>  chmod u+x test.sh
+</span></span><span style=display:flex><span>  ./test.sh
+</span></span></code></pre></div><p>首先需要给文件 <code>test.sh</code> 添加可执行权限，然后执行 <code>./test.sh</code> 就可以得到输出结果, 其中的 <code>.</code> 是标识在当前目录找可行性程序 <code>test.sh</code> 来执行，并且使用定义的 shell bang <code>#!/bin/bash</code> 来执行程序</p><ol start=2><li>作为解释器参数来执行, 可以使用解释器 <code>sh</code>, 或者其它解释器 <code>bash</code>, 使用这样的方式来执行程序，其中指定的 <code>shell bang</code> 是不生效的</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>  sh test.sh
+</span></span><span style=display:flex><span>  bash test.sh
+</span></span></code></pre></div><p>作为解释器参数来执行脚本，不需要可执行性权限，所以这种方式也是使用最多的</p><h3 id=调试>调试</h3><p>一般常用的有两个：</p><ol><li>检查语法命令 <code>sh -n test.sh</code>, 没有输出，说明没有语法错误</li><li>调试命令 <code>sh -x test.sh</code>
+下面是执行 <code>sh -x test.sh</code>的结果</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>  + <span style=color:#8be9fd;font-style:italic>echo</span> https://dev4mobiles.com
+</span></span><span style=display:flex><span>  https://dev4mobiles.com
+</span></span></code></pre></div><p>第一行 带<code>+</code> 表明调试器真正执行的命令，不带 <code>+</code> 的是我们的程序输出, 所以结果 <code>https://dev4mobiles.com</code> 是命令 <code>echo "https://dev4mobiles.com"</code> 的输出</p><h2 id=如何定义变量>如何定义变量</h2><p>下面来看一段程序，程序表明了如何定义程序</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#ff79c6>#!/bin/bash
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6></span><span style=color:#8be9fd;font-style:italic>name</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;dev4mobile&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>age</span><span style=color:#ff79c6>=</span><span style=color:#bd93f9>20</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>website</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;dev4mobiles.com, name=</span><span style=color:#f1fa8c>${</span><span style=color:#8be9fd;font-style:italic>name</span><span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>money</span><span style=color:#ff79c6>=</span>10.2
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#8be9fd;font-style:italic>$name</span> <span style=color:#8be9fd;font-style:italic>$age</span> <span style=color:#8be9fd;font-style:italic>$website</span> <span style=color:#8be9fd;font-style:italic>$money</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#f1fa8c>&#34;</span><span style=color:#8be9fd;font-style:italic>$name</span><span style=color:#f1fa8c> </span><span style=color:#8be9fd;font-style:italic>$age</span><span style=color:#f1fa8c>&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>arr</span><span style=color:#ff79c6>=(</span><span style=color:#bd93f9>1</span> <span style=color:#bd93f9>2</span> 3<span style=color:#ff79c6>)</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#f1fa8c>&#34;</span><span style=color:#f1fa8c>${</span><span style=color:#8be9fd;font-style:italic>arr</span>[@]<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>&#34;</span>
+</span></span></code></pre></div><p>程序说明：
+第一行：指定了解释器为 <code>/bain/bash</code>
+第二行：定义一个变量为 <code>name</code>，值为一个用单引号引起来的字符串
+第三行：定义一个整形变量 <code>age</code>, 值为 <code>20</code>
+第四行：定义一个用双引号引起来的字符串website, 双引号里面的字符串可以通过<code>${}</code> 的方式引用其它变量，这里引用了 <code>name</code> 字段，
+但是像第一行用单引号定义的字符串里面不可以引用其它字符串，所以双引号可以拼接字符串
+第五行：定义了一个浮点数
+第六行：使用 <code>echo</code> 输出多个变量， 变量以空格分开
+第七行：输出用双引号拼接的多个字符串
+第八行：定义一个名为 <code>arr</code> 的数组
+第九行：输出数组</p><p>执行 <code>bash test.sh</code>, 将会输出结果</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>dev4mobile <span style=color:#bd93f9>20</span> dev4mobiles.com, <span style=color:#8be9fd;font-style:italic>name</span><span style=color:#ff79c6>=</span>dev4mobile 10.2
+</span></span><span style=display:flex><span>dev4mobile <span style=color:#bd93f9>20</span>
+</span></span><span style=display:flex><span><span style=color:#bd93f9>1</span> <span style=color:#bd93f9>2</span> <span style=color:#bd93f9>3</span>
+</span></span></code></pre></div><p>变量分为<code>自定义变量</code>和<code>环境变量</code>，上面的程序就是自定义变量，还有一种环境变量，是系统已经定义好的，我们直接拿来使用就行了</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#ff79c6>#!/bin/bash
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6></span><span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#f1fa8c>&#34;\$PWD=</span><span style=color:#8be9fd;font-style:italic>$PWD</span><span style=color:#f1fa8c>&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#f1fa8c>&#34;\$TERM=</span><span style=color:#8be9fd;font-style:italic>$TERM</span><span style=color:#f1fa8c>&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#f1fa8c>&#34;\$HOME=</span><span style=color:#8be9fd;font-style:italic>$HOME</span><span style=color:#f1fa8c>&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#f1fa8c>&#34;\$PATH=</span><span style=color:#8be9fd;font-style:italic>$PATH</span><span style=color:#f1fa8c>&#34;</span>
+</span></span></code></pre></div><p>为了不让<code>${}</code> 解析成变量， 我使用 <code>\</code> 进行转义</p><p>Output:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>$PWD</span><span style=color:#ff79c6>=</span>/home/dev4mobile/data
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>$TERM</span><span style=color:#ff79c6>=</span>xterm-256color
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>$HOME</span><span style=color:#ff79c6>=</span>/home/dev4mobile
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>$PATH</span><span style=color:#ff79c6>=</span>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+</span></span></code></pre></div><h2 id=shell-表达式>Shell 表达式</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>#赋值表达式
+</span></span><span style=display:flex><span>var=5
+</span></span><span style=display:flex><span>#表达式计算
+</span></span><span style=display:flex><span>expr $var + 5 
+</span></span><span style=display:flex><span>#测试 var 是否与 5 相等
+</span></span><span style=display:flex><span>test $var -eq 5 
+</span></span><span style=display:flex><span>#测试 var 变量 是否与 5 相等的另外一种写法
+</span></span><span style=display:flex><span>[ $var -eq 5 ], 记住[] 里面的内容必须以空格开始，空格结束
+</span></span><span style=display:flex><span>#测试develop文件是否为目录
+</span></span><span style=display:flex><span>test -d ./develop
+</span></span></code></pre></div><p>注意上面的脚本不能直接拷贝来运行，需要配合其它表达式来执行</p><h2 id=shell-流程控制>Shell 流程控制</h2><ul><li><p>if 流程</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#ff79c6>#!/bin/bash
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6></span><span style=color:#8be9fd;font-style:italic>read</span> Name
+</span></span><span style=display:flex><span><span style=color:#ff79c6>if</span> <span style=color:#8be9fd;font-style:italic>test</span> <span style=color:#f1fa8c>&#34;</span><span style=color:#8be9fd;font-style:italic>$Name</span><span style=color:#f1fa8c>&#34;</span> <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;dev4mobile&#34;</span>;<span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>  <span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#f1fa8c>&#34;true&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>else</span>
+</span></span><span style=display:flex><span>  <span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#f1fa8c>&#34;false&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>fi</span>
+</span></span></code></pre></div><p>执行 <code>bash test.sh</code>
+注意：字符串相等使用 <code>=</code>且等号左右两边必须包含<strong>空格</strong>, 不然的话，解释执行会报错</p></li><li><p>case 语句</p></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#ff79c6>#!/bin/bash
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6></span><span style=color:#8be9fd;font-style:italic>read</span> Animal
+</span></span><span style=display:flex><span><span style=color:#ff79c6>case</span> <span style=color:#8be9fd;font-style:italic>$Animal</span> in
+</span></span><span style=display:flex><span>  <span style=color:#f1fa8c>&#34;pig&#34;</span><span style=color:#ff79c6>)</span>
+</span></span><span style=display:flex><span>     <span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#f1fa8c>&#34;pig&#34;</span>
+</span></span><span style=display:flex><span>     ;;
+</span></span><span style=display:flex><span>  <span style=color:#f1fa8c>&#34;beef&#34;</span><span style=color:#ff79c6>)</span>
+</span></span><span style=display:flex><span>     <span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#f1fa8c>&#34;beef&#34;</span>
+</span></span><span style=display:flex><span>     ;;
+</span></span><span style=display:flex><span>   *<span style=color:#ff79c6>)</span>
+</span></span><span style=display:flex><span>     <span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#f1fa8c>&#34;default&#34;</span>
+</span></span><span style=display:flex><span>   ;;
+</span></span><span style=display:flex><span><span style=color:#ff79c6>esac</span>
+</span></span></code></pre></div><ul><li>for 循环
+两种写法
+第一种写法</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#ff79c6>#!/bin/bash
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6></span><span style=color:#ff79c6>for</span><span style=color:#ff79c6>((</span><span style=color:#8be9fd;font-style:italic>var</span><span style=color:#ff79c6>=</span>1; var&lt;10; var++<span style=color:#ff79c6>))</span>;<span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>  <span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#8be9fd;font-style:italic>$var</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>done</span>
+</span></span></code></pre></div><p>第二种写法</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#ff79c6>#!/bin/bash
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6></span><span style=color:#ff79c6>for</span> var in <span style=color:#f1fa8c>`</span>ls -al<span style=color:#f1fa8c>`</span>;<span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>  <span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#8be9fd;font-style:italic>$var</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>done</span>
+</span></span></code></pre></div><p>其中 <strong>`ls -al`</strong> 是执行 <code>ls -al</code> 命令</p><ul><li>while 循环</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#ff79c6>#!/bin/bash
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6></span><span style=color:#8be9fd;font-style:italic>read</span> NUM
+</span></span><span style=display:flex><span><span style=color:#ff79c6>while</span> <span style=color:#ff79c6>[</span> <span style=color:#8be9fd;font-style:italic>$NUM</span> -lt <span style=color:#bd93f9>10</span> <span style=color:#ff79c6>]</span>; <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>  <span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#8be9fd;font-style:italic>$NUM</span>
+</span></span><span style=display:flex><span>  <span style=color:#8be9fd;font-style:italic>NUM</span><span style=color:#ff79c6>=</span><span style=color:#ff79c6>$((</span><span style=color:#8be9fd;font-style:italic>$NUM</span><span style=color:#ff79c6>+</span><span style=color:#bd93f9>1</span><span style=color:#ff79c6>))</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>done</span>
+</span></span></code></pre></div><p>条件放在用<code>[]</code> 中，注意里面的条件必须左右都有空格，不然解析会报错，另外 <code>$(())</code> 里面存放的是算术表达式</p><ul><li>until</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#ff79c6>#!/bin/bash
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6></span><span style=color:#8be9fd;font-style:italic>set</span> -e
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>Num</span><span style=color:#ff79c6>=</span><span style=color:#bd93f9>0</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>until</span> <span style=color:#ff79c6>[</span> <span style=color:#8be9fd;font-style:italic>$Num</span> -gt <span style=color:#bd93f9>5</span> <span style=color:#ff79c6>]</span>;<span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>  <span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#8be9fd;font-style:italic>$Num</span>
+</span></span><span style=display:flex><span>  <span style=color:#8be9fd;font-style:italic>Num</span><span style=color:#ff79c6>=</span>$<span style=color:#ff79c6>[</span>Num+1<span style=color:#ff79c6>]</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>done</span>
+</span></span></code></pre></div><p>条件跟while一样，放在 <code>[]</code> 里面，另外除了可以使用 <code>$(())</code>，也可以使用 <code>$[]</code> 里面使用算术表达式</p><ul><li>break</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#ff79c6>#!/bin/bash
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6></span><span style=color:#ff79c6>for</span> num in <span style=color:#bd93f9>1</span> <span style=color:#bd93f9>2</span> 3;<span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>if</span> <span style=color:#8be9fd;font-style:italic>test</span> <span style=color:#8be9fd;font-style:italic>$num</span> -gt 2;<span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>break</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>fi</span>
+</span></span><span style=display:flex><span>  <span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#8be9fd;font-style:italic>$num</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>done</span>
+</span></span></code></pre></div><ul><li>contine</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#ff79c6>#!/bin/bash
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6></span><span style=color:#ff79c6>for</span> num in <span style=color:#bd93f9>1</span> <span style=color:#bd93f9>2</span> 3;<span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>if</span> <span style=color:#8be9fd;font-style:italic>test</span> <span style=color:#8be9fd;font-style:italic>$num</span> -eq 2;<span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>continue</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>fi</span>
+</span></span><span style=display:flex><span>  <span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#8be9fd;font-style:italic>$num</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>done</span>
+</span></span></code></pre></div><h2 id=shell-函数>Shell 函数</h2><p>定义函数有格式</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#ff79c6>[</span><span style=color:#ff79c6>function</span><span style=color:#ff79c6>]</span> fun_name<span style=color:#ff79c6>()</span> <span style=color:#ff79c6>{</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>[</span><span style=color:#ff79c6>return</span> xxx<span style=color:#ff79c6>]</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>}</span>
+</span></span></code></pre></div><p>其中<code>[]</code> 中的内容是可以省略的</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#ff79c6>#!/bin/bash
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6></span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>#定义函数</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span> print<span style=color:#ff79c6>(){</span>
+</span></span><span style=display:flex><span>  <span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#f1fa8c>&#34;https://dev4mobiles.com&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>}</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>#调用函数</span>
+</span></span><span style=display:flex><span>print
+</span></span><span style=display:flex><span><span style=color:#6272a4>#定义带参数的函数</span>
+</span></span><span style=display:flex><span>say<span style=color:#ff79c6>(){</span>
+</span></span><span style=display:flex><span> <span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#8be9fd;font-style:italic>$1</span> <span style=color:#8be9fd;font-style:italic>$2</span>
+</span></span><span style=display:flex><span> <span style=color:#6272a4>#只能返回数字且范围为0～255</span>
+</span></span><span style=display:flex><span> <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>2</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>}</span>
+</span></span><span style=display:flex><span>say <span style=color:#bd93f9>1</span> <span style=color:#bd93f9>2</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 得到函数的返回值</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#8be9fd;font-style:italic>$?</span>
+</span></span></code></pre></div><p>⚠️不能在函数 <code>()</code> 定义参数， 方法内接收参数 <code>$1</code>, <code>$2</code> 格式来接收参数
+调用方法使用方法名后跟参数
+只能立刻使用 <code>$?</code> 来得到结果，其中方法返回的参数只能是0～255之间的值(很奇葩，不知道为啥设计成这样)</p><h2 id=总结>总结</h2><p>看过上面的教程，相信差不多能够入门了，剩下来的就是花时间多练习，相信你会成为 <code>shell</code> 脚本专家</p></div></main><script async src="https://www.googletagmanager.com/gtag/js?id=G-CHP0LWG5GF"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-CHP0LWG5GF")</script></body></html>

@@ -1,0 +1,184 @@
+<!doctype html><html xmlns=http://www.w3.org/1999/xhtml xml:lang=en-us lang=en-us><head><link href=https://gmpg.org/xfn/11 rel=profile><meta charset=utf-8><meta name=generator content="Hugo 0.110.0"><meta name=viewport content="width=device-width,initial-scale=1"><script async src="https://www.googletagmanager.com/gtag/js?id=G-CHP0LWG5GF"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-CHP0LWG5GF")</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2009162505910536" crossorigin=anonymous></script><title>k8s 安装 &#183; rwkey</title><meta name=description content><link type=text/css rel=stylesheet href=https://rwkey.com/css/print.css media=print><link type=text/css rel=stylesheet href=https://rwkey.com/css/poole.css><link type=text/css rel=stylesheet href=https://rwkey.com/css/syntax.css><link type=text/css rel=stylesheet href=https://rwkey.com/css/hyde.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700"><link rel=apple-touch-icon-precomposed sizes=144x144 href=/apple-touch-icon-144-precomposed.png><link rel="shortcut icon" href=/favicon.png></head><body><aside class=sidebar><div class="container sidebar-sticky"><div class=sidebar-about><a href=https://rwkey.com/><h1>rwkey</h1></a><p class=lead>北漂码农</p></div><nav><ul class=sidebar-nav><li><a href=https://rwkey.com/>Home</a></li><li><a href=https://github.com/crwkey/>Github</a></li></ul></nav><p>&copy; 2023. All rights reserved.</p></div></aside><main class="content container"><div class=post><h1>k8s 安装</h1><time datetime=2020-06-28T12:17:35Z class=post-date>Sun, Jun 28, 2020</time><ul><li><a href=#%E4%BD%BF%E7%94%A8kubeadm%E5%AE%89%E8%A3%85kubernetes%E9%9B%86%E7%BE%A4>使用kubeadm安装kubernetes集群</a><ul><li><a href=#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87>环境准备</a><ul><li><a href=#%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99%E5%A6%82%E6%9E%9C%E5%BC%80%E4%BA%86%E7%9A%84%E8%AF%9D>关闭防火墙(如果开了的话)</a></li><li><a href=#%E5%85%B3%E9%97%AD-selinux>关闭 SELinux</a></li><li><a href=#%E5%85%B3%E9%97%ADswap>关闭swap</a></li><li><a href=#%E5%8A%A0%E8%BD%BD%E5%86%85%E6%A0%B8%E7%9B%B8%E5%85%B3%E6%A8%A1%E5%9D%97>加载内核相关模块</a></li><li><a href=#%E6%9B%B4%E6%94%B9%E7%B3%BB%E7%BB%9F%E5%8F%82%E6%95%B0>更改系统参数</a></li></ul></li><li><a href=#%E5%AE%89%E8%A3%85docker>安装docker</a><ul><li><a href=#%E6%B7%BB%E5%8A%A0docker%E6%BA%90>添加docker源</a></li><li><a href=#%E6%9F%A5%E7%9C%8Bdocker%E7%89%88%E6%9C%AC>查看docker版本</a></li><li><a href=#%E5%AE%89%E8%A3%85%E6%8C%87%E5%AE%9A%E7%9A%84docker%E7%89%88%E6%9C%AC>安装指定的docker版本</a></li></ul></li><li><a href=#kubeadm%E5%AE%89%E8%A3%85kubernetes>kubeadm安装kubernetes</a><ul><li><a href=#%E5%AE%89%E8%A3%85kubeadm%E5%92%8Ckubelet>安装kubeadm和kubelet</a></li><li><a href=#docker%E7%9A%84cgroup-driver>docker的cgroup driver</a><ul><li><a href=#cgroup-driver%E5%92%8C%E5%BC%95%E5%85%A5%E7%9A%84%E9%97%AE%E9%A2%98>cgroup driver和引入的问题</a></li><li><a href=#%E4%BF%AE%E6%94%B9docker>修改docker</a></li><li><a href=#%E4%BF%AE%E6%94%B9kubelet>修改kubelet</a></li><li><a href=#cgroup-driver%E9%80%89%E5%8F%96-systemd-vs-cgroupfs>cgroup driver选取: systemd vs cgroupfs</a></li><li><a href=#%E9%87%8D%E6%96%B0%E5%8A%A0%E8%BD%BD%E6%9C%8D%E5%8A%A1-systemctl-daemon-reload%E5%92%8C-systemctl-restart-xxx>重新加载服务 systemctl daemon-reload和 systemctl restart xxx</a></li></ul></li><li><a href=#kubeadm%E5%88%9D%E5%A7%8B%E5%8C%96%E9%9B%86%E7%BE%A4>kubeadm初始化集群</a></li><li><a href=#%E9%83%A8%E7%BD%B2%E7%BD%91%E7%BB%9C%E6%8F%92%E4%BB%B6calico>部署网络插件calico</a></li><li><a href=#%E5%AD%98%E5%82%A8%E6%8F%92%E4%BB%B6-ceph>存储插件 ceph</a></li><li><a href=#%E5%BC%80%E5%90%AFipvs>开启ipvs</a><ul><li><a href=#%E7%BC%96%E8%BE%91configmap>编辑configmap</a></li></ul></li><li><a href=#%E5%85%B3%E4%BA%8Ekubeadm%E7%9A%84%E9%85%8D%E7%BD%AE>关于kubeadm的配置</a></li><li><a href=#helm%E5%AE%89%E8%A3%85>Helm安装</a></li><li><a href=#%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F>镜像加速</a></li></ul></li></ul></li></ul><h1 id=使用kubeadm安装kubernetes集群>使用kubeadm安装kubernetes集群</h1><p>系统: Centos7<br><a href=https://kubernetes.io/zh/docs/setup/independent/install-kubeadm/>官方文档</a></p><h2 id=环境准备>环境准备</h2><h3 id=关闭防火墙如果开了的话>关闭防火墙(如果开了的话)</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>systemctl stop firewalld  
+</span></span><span style=display:flex><span>systemctl disable firewalld  
+</span></span></code></pre></div><h3 id=关闭-selinux>关闭 SELinux</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>setenforce 0
+</span></span><span style=display:flex><span>sed -i &#39;s/^SELINUX=enforcing$/SELINUX=permissive/&#39; /etc/selinux/config
+</span></span></code></pre></div><h3 id=关闭swap>关闭swap</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>swapoff -a
+</span></span><span style=display:flex><span>sed -i &#34;s/\(^.*swap.*$\)/#\1/&#34; /etc/fstab
+</span></span></code></pre></div><h3 id=加载内核相关模块>加载内核相关模块</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>modprobe br_netfilter  
+</span></span><span style=display:flex><span>modprobe  ip_vs     
+</span></span><span style=display:flex><span>modprobe  ip_vs_rr  
+</span></span><span style=display:flex><span>modprobe  ip_vs_wrr  
+</span></span><span style=display:flex><span>modprobe  ip_vs_sh  
+</span></span><span style=display:flex><span>modprobe  nf_conntrack_ipv4
+</span></span></code></pre></div><p>modprobe br_netfilter</p><blockquote><p>ipv4/v6 arp包转发过滤.</p></blockquote><p>modprobe ip_vs<br>modprobe ip_vs_rr<br>modprobe ip_vs_wrr<br>modprobe ip_vs_sh</p><blockquote><p>4层负载均衡</p></blockquote><p>modprobe nf_conntrack_ipv4 或 modprobe nf_conntrack 内核>=4.19</p><blockquote><p>nf_conntrack(在老版本的 Linux 内核中叫 ip_conntrack)是一个内核模块,用于跟踪一个连接的状态的。连接状态跟踪可以供其他模块使用,最常见的两个使用场景是 iptables 的 nat 的 state 模块。 iptables 的 nat 通过规则来修改目的/源地址,但光修改地址不行,我们还需要能让回来的包能路由到最初的来源主机。这就需要借助 nf_conntrack 来找到原来那个连接的记录才行。而 state 模块则是直接使用 nf_conntrack 里记录的连接的状态来匹配用户定义的相关规则.<br><a href=https://clodfisher.github.io/2018/09/nf_conntrack/>Iptables之nf_conntrack模块</a></p></blockquote><h3 id=更改系统参数>更改系统参数</h3><p>系统参数与上述加载的内核模块有关.<br>/etc/sysctl.conf</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>cat &lt;&lt;EOF &gt;&gt; /etc/sysctl.conf  
+</span></span><span style=display:flex><span>net.ipv4.ip_forward = 1
+</span></span><span style=display:flex><span>net.bridge.bridge-nf-call-ip6tables = 1
+</span></span><span style=display:flex><span>net.bridge.bridge-nf-call-iptables = 1
+</span></span><span style=display:flex><span>EOF
+</span></span></code></pre></div><p>参数生效: sysctl -p</p><h2 id=安装docker>安装docker</h2><h3 id=添加docker源>添加docker源</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>yum -y install yum-utils  
+</span></span><span style=display:flex><span>yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+</span></span></code></pre></div><h3 id=查看docker版本>查看docker版本</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>yum list docker-ce --showduplicates|sort -r 
+</span></span></code></pre></div><h3 id=安装指定的docker版本>安装指定的docker版本</h3><p>根据kubernetes版本安装对应版本的docker.
+具体信息可以查看 <a href=https://github.com/kubernetes/kubernetes/releases>https://github.com/kubernetes/kubernetes/releases</a> 查看对应版本的changelog.
+目前相对比较稳定, 以下截取的16版本的log:</p><blockquote><p>Unchanged<br>The list of validated docker versions remains unchanged.<br>The current list is 1.13.1, 17.03, 17.06, 17.09, 18.06, 18.09. (#72823, #72831)<br>CNI remains unchanged at v0.7.5. (#75455)<br>cri-tools remains unchanged at v1.14.0. (#75658)<br>&mldr;&mldr;<br><a href=https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.16.md#v1164>kubernetes/CHANGELOG-1.16.md</a></p></blockquote><p>这边安装了docker18的版本</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>yum install -y docker-ce-18.09.9  
+</span></span><span style=display:flex><span>systemctl enable docker &amp;&amp; systemctl start docker  
+</span></span></code></pre></div><h2 id=kubeadm安装kubernetes>kubeadm安装kubernetes</h2><h3 id=安装kubeadm和kubelet>安装kubeadm和kubelet</h3><p>添加kubernets源, 这里使用了的是阿里的kubernetes源.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>cat &lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo
+</span></span><span style=display:flex><span>[kubernetes]
+</span></span><span style=display:flex><span>name=Kubernetes
+</span></span><span style=display:flex><span>baseurl=http://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
+</span></span><span style=display:flex><span>enabled=1
+</span></span><span style=display:flex><span>gpgcheck=0
+</span></span><span style=display:flex><span>repo_gpgcheck=0
+</span></span><span style=display:flex><span>gpgkey=http://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg
+</span></span><span style=display:flex><span>	   http://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+</span></span><span style=display:flex><span>EOF
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>systemctl enable kubelet &amp;&amp; systemctl start kubelet
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>yum -y install ipset
+</span></span><span style=display:flex><span>yum -y install ipvsadm
+</span></span></code></pre></div><h3 id=docker的cgroup-driver>docker的cgroup driver</h3><h4 id=cgroup-driver和引入的问题>cgroup driver和引入的问题</h4><p>cgroup控制进程资源的使用, 具体实现的方式有两种driver, systemd和cgroupfs.</p><p>在kubelet(kubernetes中控制容器生命周期组件)中可以配置cgroup的driver. docker默认设置中也有driver的设置. [kubelet控制一套runc接口, docker实现了一套runc的接口. &ndash;> kubelet控制docker]</p><p>在两者配置的driver不同时, 会导致安装kubernetes时报错.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>failed to create kubelet: misconfiguration: kubelet cgroup driver: &#34;cgroupfs&#34; is different from docker cgroup driver: &#34;systemd&#34;
+</span></span></code></pre></div><p>这个问题的解决, 使docker和kubelet中配置参数一致即可, 都为systemd或都为cgroupfs.</p><p>默认情形下, kubelet中cgroup driver使用的是systemd, 而docker中使用的是cgroupfs的driver.</p><p>kubernetes推荐使用的是systemd作为cgroup的driver.</p><blockquote><p>Cgroup 驱动程序
+当某个 Linux 系统发行版使用 systemd 作为其初始化系统时，初始化进程会生成并使用一个 root 控制组 （cgroup），并充当 cgroup 管理器。 systemd 与 cgroup 集成紧密，并将为每个进程分配 cgroup。 您也可以配置容器运行时和 kubelet 使用 cgroupfs。 连同 systemd 一起使用 cgroupfs 意味着将有两个不同的 cgroup 管理器。
+控制组用来约束分配给进程的资源。 单个 cgroup 管理器将简化分配资源的视图，并且默认情况下将对可用资源和使用中的资源具有更一致的视图。 当有两个管理器时，最终将对这些资源产生两种视图。 在此领域我们已经看到案例，某些节点配置让 kubelet 和 docker 使用 cgroupfs，而节点上运行的其余进程则使用 systemd；这类节点在资源压力下会变得不稳定。
+更改设置，令容器运行时和 kubelet 使用 systemd 作为 cgroup 驱动，以此使系统更为稳定。 请注意在 docker 下设置 native.cgroupdriver=systemd 选项。
+警告:
+强烈建议不要更改已加入集群的节点的 cgroup 驱动。 如果 kubelet 已经使用某 cgroup 驱动的语义创建了 pod，尝试更改运行时以使用别的 cgroup 驱动，为现有 Pods 重新创建 PodSandbox 时会产生错误。 重启 kubelet 也可能无法解决此类问题。 推荐将工作负载逐出节点，之后将节点从集群中删除并重新加入。</p></blockquote><p><a href=https://kubernetes.io/zh/docs/setup/production-environment/container-runtimes/#cgroup-drivers>官网中文</a><br><a href=https://kubernetes.io/docs/setup/production-environment/container-runtimes/#cgroup-drivers>官网英文</a></p><h4 id=修改docker>修改docker</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>cat &gt; /etc/docker/daemon.json &lt;&lt;EOF
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  &#34;exec-opts&#34;: [&#34;native.cgroupdriver=systemd&#34;],
+</span></span><span style=display:flex><span>  &#34;log-driver&#34;: &#34;json-file&#34;,
+</span></span><span style=display:flex><span>  &#34;log-opts&#34;: {
+</span></span><span style=display:flex><span>    &#34;max-size&#34;: &#34;100m&#34;
+</span></span><span style=display:flex><span>  },
+</span></span><span style=display:flex><span>  &#34;storage-driver&#34;: &#34;overlay2&#34;,
+</span></span><span style=display:flex><span>  &#34;registry-mirrors&#34;: [&#34;https://registry.docker-cn.com&#34;, &#34;https://docker.mirrors.ustc.edu.cn&#34;]
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>EOF
+</span></span></code></pre></div><p><a href=https://github.com/kubernetes/kubeadm/issues/1394>Change default cgroup driver to systemd and verify parity w/docker on preflight</a></p><h4 id=修改kubelet>修改kubelet</h4><p><strong>默认不需要修改kubelet参数, 如果需要, 可以参考下面方式进行修改.</strong></p><p>配置文件路径:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>/etc/systemd/system/kubelet.service.d/10-kubeadm.conf  
+</span></span><span style=display:flex><span>/usr/lib/systemd/system/kubelet.service.d/10-kubeadm.conf  
+</span></span></code></pre></div><p>网上配置文件路径1居多, 在centos7安装中查找到的是路径2.</p><p>举例将kubelet中driver修改为systemd.<br>config中添加 &ndash;cgroup-driver=systemd</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>[Service]
+</span></span><span style=display:flex><span>Environment=&#34;KUBELET_KUBECONFIG_ARGS=--bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf --cgroup-driver=systemd&#34;
+</span></span><span style=display:flex><span>Environment=&#34;KUBELET_CONFIG_ARGS=--config=/var/lib/kubelet/config.yaml&#34;
+</span></span><span style=display:flex><span>......
+</span></span></code></pre></div><h4 id=cgroup-driver选取-systemd-vs-cgroupfs>cgroup driver选取: systemd vs cgroupfs</h4><p>No results
+<a href=https://github.com/coreos/bugs/issues/1435>docker cgroup driver discussion - cgroupfs or systemd</a></p><h4 id=重新加载服务-systemctl-daemon-reload和-systemctl-restart-xxx>重新加载服务 systemctl daemon-reload和 systemctl restart xxx</h4><p>见标题</p><h3 id=kubeadm初始化集群>kubeadm初始化集群</h3><p><strong>上述命令需要在每个节点上执行. 以下命令初始化kubenetes集群, 只需要在主节点上运行初始化命令即可, 集群初始化完成后, 其他节点通过kubeadm join命令加入集群即可.</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span> kubeadm init  --image-repository  registry.aliyuncs.com/google_containers --pod-network-cidr=192.168.0.0/16
+</span></span></code></pre></div><p>命令成功后会输出下面.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>Your Kubernetes control-plane has initialized successfully!
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>To start using your cluster, you need to run the following as a regular user:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  mkdir -p $HOME/.kube
+</span></span><span style=display:flex><span>  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+</span></span><span style=display:flex><span>  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>You should now deploy a pod network to the cluster.
+</span></span><span style=display:flex><span>Run &#34;kubectl apply -f [podnetwork].yaml&#34; with one of the options listed at:
+</span></span><span style=display:flex><span>  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Then you can join any number of worker nodes by running the following on each as root:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>kubeadm join xxxxx:6443 --token gf7pwf.dix9uzxq50u47n2f \
+</span></span><span style=display:flex><span>    --discovery-token-ca-cert-hash sha256:3166fc496e1b6613fc0e7173eb4f750535cd0df2f9ceb09564873e35dfa5581b
+</span></span></code></pre></div><p>root账户:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>  mkdir -p $HOME/.kube
+</span></span><span style=display:flex><span>  cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+</span></span><span style=display:flex><span>  chown $(id -u):$(id -g) $HOME/.kube/config
+</span></span></code></pre></div><p>非root账户:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>  mkdir -p $HOME/.kube
+</span></span><span style=display:flex><span>  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+</span></span><span style=display:flex><span>  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+</span></span></code></pre></div><p>其他节点使用kubeadmin join命令加入集群.</p><p>通过命令查看集群信息</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>[root@node201 charts]# kubectl cluster-info
+</span></span><span style=display:flex><span>Kubernetes master is running at https://xxxx:6443
+</span></span><span style=display:flex><span>KubeDNS is running at https://xxxx:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>To further debug and diagnose cluster problems, use &#39;kubectl cluster-info dump&#39;.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>[root@node201 charts]# kubectl get node
+</span></span><span style=display:flex><span>NAME      STATUS   ROLES    AGE     VERSION
+</span></span><span style=display:flex><span>node201   Ready    master   2m16s   v1.17.0
+</span></span><span style=display:flex><span>node202   Ready    &lt;none&gt;   52s     v1.17.0
+</span></span><span style=display:flex><span>node203   Ready    &lt;none&gt;   90s     v1.17.0
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>[root@node201 charts]# kubectl get pod -n kube-system -o wide
+</span></span><span style=display:flex><span>NAME                              READY   STATUS              RESTARTS   AGE     IP            NODE      NOMINATED NODE   READINESS GATES
+</span></span><span style=display:flex><span>coredns-9d85f5447-tpc9p           0/1     ContainerCreating   0          2m18s   &lt;none&gt;        node201   &lt;none&gt;           &lt;none&gt;
+</span></span><span style=display:flex><span>coredns-9d85f5447-wg5c2           0/1     ContainerCreating   0          2m18s   &lt;none&gt;        node201   &lt;none&gt;           &lt;none&gt;
+</span></span><span style=display:flex><span>etcd-node201                      1/1     Running             0          2m25s   10.0.40.201   node201   &lt;none&gt;           &lt;none&gt;
+</span></span><span style=display:flex><span>kube-apiserver-node201            1/1     Running             0          2m24s   10.0.40.201   node201   &lt;none&gt;           &lt;none&gt;
+</span></span><span style=display:flex><span>kube-controller-manager-node201   1/1     Running             0          2m24s   10.0.40.201   node201   &lt;none&gt;           &lt;none&gt;
+</span></span><span style=display:flex><span>kube-proxy-5hvp4                  1/1     Running             0          74s     10.0.40.202   node202   &lt;none&gt;           &lt;none&gt;
+</span></span><span style=display:flex><span>kube-proxy-6vgc8                  1/1     Running             0          112s    10.0.40.203   node203   &lt;none&gt;           &lt;none&gt;
+</span></span><span style=display:flex><span>kube-proxy-hxsnm                  1/1     Running             0          2m17s   10.0.40.201   node201   &lt;none&gt;           &lt;none&gt;
+</span></span><span style=display:flex><span>kube-scheduler-node201            1/1     Running             0          2m24s   10.0.40.201   node201   &lt;none&gt;           &lt;none&gt;
+</span></span></code></pre></div><p>这里的coredns的容器没有起来的.</p><h3 id=部署网络插件calico>部署网络插件calico</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>kubectl apply -f https://docs.projectcalico.org/v3.10/manifests/calico.yaml  
+</span></span></code></pre></div><p>网络安装好之后, coredns的相关容器也启动起来了.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>[root@node201 charts]# kubectl get pod -n kube-system -o wide
+</span></span><span style=display:flex><span>NAME                                       READY   STATUS    RESTARTS   AGE     IP              NODE      NOMINATED NODE   READINESS GATES
+</span></span><span style=display:flex><span>calico-kube-controllers-74c9747c46-h7577   0/1     Running   0          65s     192.168.244.1   node202   &lt;none&gt;           &lt;none&gt;
+</span></span><span style=display:flex><span>calico-node-7stvb                          1/1     Running   0          65s     10.0.40.203     node203   &lt;none&gt;           &lt;none&gt;
+</span></span><span style=display:flex><span>calico-node-jncrb                          1/1     Running   0          65s     10.0.40.202     node202   &lt;none&gt;           &lt;none&gt;
+</span></span><span style=display:flex><span>calico-node-z2xpq                          1/1     Running   0          65s     10.0.40.201     node201   &lt;none&gt;           &lt;none&gt;
+</span></span><span style=display:flex><span>coredns-9d85f5447-tpc9p                    0/1     Running   0          3m35s   192.168.161.2   node201   &lt;none&gt;           &lt;none&gt;
+</span></span><span style=display:flex><span>coredns-9d85f5447-wg5c2                    1/1     Running   0          3m35s   192.168.161.1   node201   &lt;none&gt;           &lt;none&gt;
+</span></span><span style=display:flex><span>etcd-node201                               1/1     Running   0          3m42s   10.0.40.201     node201   &lt;none&gt;           &lt;none&gt;
+</span></span><span style=display:flex><span>kube-apiserver-node201                     1/1     Running   0          3m41s   10.0.40.201     node201   &lt;none&gt;           &lt;none&gt;
+</span></span><span style=display:flex><span>kube-controller-manager-node201            1/1     Running   0          3m41s   10.0.40.201     node201   &lt;none&gt;           &lt;none&gt;
+</span></span><span style=display:flex><span>kube-proxy-5hvp4                           1/1     Running   0          2m31s   10.0.40.202     node202   &lt;none&gt;           &lt;none&gt;
+</span></span><span style=display:flex><span>kube-proxy-6vgc8                           1/1     Running   0          3m9s    10.0.40.203     node203   &lt;none&gt;           &lt;none&gt;
+</span></span><span style=display:flex><span>kube-proxy-hxsnm                           1/1     Running   0          3m34s   10.0.40.201     node201   &lt;none&gt;           &lt;none&gt;
+</span></span><span style=display:flex><span>kube-scheduler-node201                     1/1     Running   0          3m41s   10.0.40.201     node201   &lt;none&gt;           &lt;none&gt;
+</span></span></code></pre></div><h3 id=存储插件-ceph>存储插件 ceph</h3><p>存储插件非必选, 了解.<br><a href=https://rook.io/docs/rook/v1.1/ceph-quickstart.html>ceph</a></p><h3 id=开启ipvs>开启ipvs</h3><p>为什么使用ipvs代替iptable?</p><p>ipvs可以带来性能上的提升, kubernetes默认的是使用iptables, 当集群达到一定规模后, iptables可能会带来管理运维上的灾难.</p><p>有几种可以实现的方式, 这里展示编辑configmap的方式, 同时, 在kubeadm init时也可以指定参数.</p><p>安装工具ipset, ipvsadm(前面已安装):</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>yum -y install ipset
+</span></span><span style=display:flex><span>yum -y install ipvsadm
+</span></span></code></pre></div><h4 id=编辑configmap>编辑configmap</h4><p>编辑kube-proxy configmap, 将mode字段值改为ipvs. [默认为空]</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>[root@node201 ~]# kubectl get cm -n kube-system
+</span></span><span style=display:flex><span>NAME                                 DATA   AGE
+</span></span><span style=display:flex><span>calico-config                        4      6m48s
+</span></span><span style=display:flex><span>coredns                              1      148m
+</span></span><span style=display:flex><span>extension-apiserver-authentication   6      148m
+</span></span><span style=display:flex><span>kube-proxy                           2      148m
+</span></span><span style=display:flex><span>kubeadm-config                       2      148m
+</span></span><span style=display:flex><span>kubelet-config-1.17                  1      148m
+</span></span><span style=display:flex><span>[root@host-10-0-40-201 ~]# kubectl edit cm kube-proxy -n kube-system
+</span></span><span style=display:flex><span>configmap/kube-proxy edited
+</span></span></code></pre></div><p>重启kube-proxy pod. (删除pod后, 会自动新建pod)</p><p>查看新kube-proxy日志, 显示Using ipvs Proxier.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>[root@node201 ~]# kubectl logs kube-proxy-dlv4k -n kube-system
+</span></span><span style=display:flex><span>I1231 05:47:33.918206       1 node.go:135] Successfully retrieved node IP: 10.0.40.202
+</span></span><span style=display:flex><span>I1231 05:47:33.918288       1 server_others.go:172] Using ipvs Proxier.
+</span></span><span style=display:flex><span>W1231 05:47:33.918595       1 proxier.go:414] clusterCIDR not specified, unable to distinguish between internal and external traffic
+</span></span><span style=display:flex><span>W1231 05:47:33.918615       1 proxier.go:420] IPVS scheduler not specified, use rr by default
+</span></span><span style=display:flex><span>I1231 05:47:33.918934       1 server.go:571] Version: v1.17.0
+</span></span><span style=display:flex><span>I1231 05:47:33.919484       1 conntrack.go:52] Setting nf_conntrack_max to 131072
+</span></span><span style=display:flex><span>I1231 05:47:33.919800       1 config.go:313] Starting service config controller
+</span></span><span style=display:flex><span>I1231 05:47:33.919834       1 shared_informer.go:197] Waiting for caches to sync for service config
+</span></span><span style=display:flex><span>I1231 05:47:33.919871       1 config.go:131] Starting endpoints config controller
+</span></span><span style=display:flex><span>I1231 05:47:33.919892       1 shared_informer.go:197] Waiting for caches to sync for endpoints config
+</span></span><span style=display:flex><span>I1231 05:47:34.020030       1 shared_informer.go:204] Caches are synced for service config
+</span></span><span style=display:flex><span>I1231 05:47:34.020145       1 shared_informer.go:204] Caches are synced for endpoints config
+</span></span></code></pre></div><p>可以通过ipvsadm -ln查看信息.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>[root@node201 ~]# ipvsadm -ln
+</span></span><span style=display:flex><span>IP Virtual Server version 1.2.1 (size=4096)
+</span></span><span style=display:flex><span>Prot LocalAddress:Port Scheduler Flags
+</span></span><span style=display:flex><span>  -&gt; RemoteAddress:Port           Forward Weight ActiveConn InActConn
+</span></span><span style=display:flex><span>TCP  10.96.0.1:443 rr
+</span></span><span style=display:flex><span>  -&gt; 10.0.40.201:6443             Masq    1      0          0
+</span></span><span style=display:flex><span>TCP  10.96.0.10:53 rr
+</span></span><span style=display:flex><span>  -&gt; 192.168.207.193:53           Masq    1      0          0
+</span></span><span style=display:flex><span>  -&gt; 192.168.207.194:53           Masq    1      0          0
+</span></span><span style=display:flex><span>TCP  10.96.0.10:9153 rr
+</span></span><span style=display:flex><span>  -&gt; 192.168.207.193:9153         Masq    1      0          0
+</span></span><span style=display:flex><span>  -&gt; 192.168.207.194:9153         Masq    1      0          0
+</span></span><span style=display:flex><span>UDP  10.96.0.10:53 rr
+</span></span><span style=display:flex><span>  -&gt; 192.168.207.193:53           Masq    1      0          0
+</span></span><span style=display:flex><span>  -&gt; 192.168.207.194:53           Masq    1      0          0
+</span></span></code></pre></div><p>更多关于ipvs和iptables可以了解: <a href=https://www.qikqiak.com/post/how-to-use-ipvs-in-kubernetes/>ipvs 基本介绍如何在 kubernetes 中启用 ipvs</a></p><h3 id=关于kubeadm的配置>关于kubeadm的配置</h3><p>kubeadm的配置可以修改镜像仓库, ipvs的设置的.<br>通过导出默认配置, 然后修改默认配置.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>kubeadm config print init-defaults &gt; kubeadm.yaml
+</span></span><span style=display:flex><span>......
+</span></span><span style=display:flex><span>kubeadm init --config kubeadm.yaml
+</span></span></code></pre></div><h3 id=helm安装>Helm安装</h3><p><a href=https://whmzsu.github.io/helm-doc-zh-cn/>helm用户指南</a><br><a href=https://jimmysong.io/kubernetes-handbook/practice/helm.html>使用Helm管理kubernetes应用</a></p><p>Helm是一个kubernetes应用的包管理工具，用来管理charts——预先配置好的安装包资源，有点类似于Ubuntu的APT和CentOS中的yum。</p><p>Helm chart是用来封装kubernetes原生应用程序的yaml文件，可以在你部署应用的时候自定义应用程序的一些metadata，便与应用程序的分发。</p><p>Helm和charts的主要作用：
+应用程序封装<br>版本管理<br>依赖检查<br>便于应用程序分发</p><p>每一个版本 release, Helm 提供多种操作系统的二进制版本。这些二进制版本可以手动下载和安装。</p><p>下载想要的版本 <a href=https://github.com/helm/helm/releases>https://github.com/helm/helm/releases</a>, 解压缩（tar -zxvf helm-v2.0.0-linux-amd64.tgz）. helm 在解压后的目录中找到二进制文件，并将其移动到所需的位置（mv linux-amd64/helm /usr/local/bin/helm）.</p><p>以下以2.16版本为例.<br>PS: Helm v2与v3区别较大. 自行谷歌学习.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>wget https://get.helm.sh/helm-v2.16.3-linux-amd64.tar.gz
+</span></span><span style=display:flex><span>tar -xzvf helm-v2.16.3-linux-amd64.tar.gz
+</span></span><span style=display:flex><span>mv linux-amd64/helm /usr/local/bin/helm
+</span></span><span style=display:flex><span>helm init --service-account tiller --upgrade -i registry.cn-hangzhou.aliyuncs.com/google_containers/tiller:v2.16.3 --stable-repo-url http://mirror.azure.cn/kubernetes/charts/
+</span></span></code></pre></div><p>如果有问题再执行.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>kubectl create serviceaccount --namespace kube-system tiller  
+</span></span><span style=display:flex><span>kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller  
+</span></span><span style=display:flex><span>kubectl patch deploy --namespace kube-system tiller-deploy -p &#39;{&#34;spec&#34;:{&#34;template&#34;:{&#34;spec&#34;:{&#34;serviceAccount&#34;:&#34;tiller&#34;}}}}&#39;  
+</span></span></code></pre></div><p><a href=https://github.com/fnproject/fn-helm/issues/21>forbidden: User &ldquo;system:serviceaccount:kube-system:default&rdquo; cannot get namespaces in the namespace &ldquo;default</a></p><p>参考:<br><a href=https://whmzsu.github.io/helm-doc-zh-cn/quickstart/install-zh_cn.html>https://whmzsu.github.io/helm-doc-zh-cn/quickstart/install-zh_cn.html</a>
+<a href=https://github.com/helm/helm/issues/3130>https://github.com/helm/helm/issues/3130</a></p><h3 id=镜像加速>镜像加速</h3><p><a href="https://www.ilanni.com/?p=14534">https://www.ilanni.com/?p=14534</a></p></div></main><script async src="https://www.googletagmanager.com/gtag/js?id=G-CHP0LWG5GF"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-CHP0LWG5GF")</script></body></html>

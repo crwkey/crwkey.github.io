@@ -1,0 +1,26 @@
+<!doctype html><html xmlns=http://www.w3.org/1999/xhtml xml:lang=en-us lang=en-us><head><link href=https://gmpg.org/xfn/11 rel=profile><meta charset=utf-8><meta name=generator content="Hugo 0.110.0"><meta name=viewport content="width=device-width,initial-scale=1"><script async src="https://www.googletagmanager.com/gtag/js?id=G-CHP0LWG5GF"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-CHP0LWG5GF")</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2009162505910536" crossorigin=anonymous></script><title>2021_01_06_go_make_vs_new &#183; rwkey</title><meta name=description content><link type=text/css rel=stylesheet href=https://rwkey.com/css/print.css media=print><link type=text/css rel=stylesheet href=https://rwkey.com/css/poole.css><link type=text/css rel=stylesheet href=https://rwkey.com/css/syntax.css><link type=text/css rel=stylesheet href=https://rwkey.com/css/hyde.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700"><link rel=apple-touch-icon-precomposed sizes=144x144 href=/apple-touch-icon-144-precomposed.png><link rel="shortcut icon" href=/favicon.png></head><body><aside class=sidebar><div class="container sidebar-sticky"><div class=sidebar-about><a href=https://rwkey.com/><h1>rwkey</h1></a><p class=lead>北漂码农</p></div><nav><ul class=sidebar-nav><li><a href=https://rwkey.com/>Home</a></li><li><a href=https://github.com/crwkey/>Github</a></li></ul></nav><p>&copy; 2023. All rights reserved.</p></div></aside><main class="content container"><div class=post><h1>2021_01_06_go_make_vs_new</h1><time datetime=2021-01-06T15:00:13+0800 class=post-date>Wed, Jan 6, 2021</time><p><a href=https://www.godesignpatterns.com/2014/04/new-vs-make.html>https://www.godesignpatterns.com/2014/04/new-vs-make.html</a></p><p>new: 申请一块内存，返回地址
+make: 用来初始化 slice, map, channel, 返回的不是指针，</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>func</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>const</span> n = <span style=color:#bd93f9>5</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// Start up the goroutines...
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span><span style=color:#ff79c6>for</span> i <span style=color:#ff79c6>:=</span> <span style=color:#bd93f9>0</span>; i &lt; n; i<span style=color:#ff79c6>++</span> {
+</span></span><span style=display:flex><span>    i <span style=color:#ff79c6>:=</span> i
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>go</span> <span style=color:#8be9fd;font-style:italic>func</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>select</span> {
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>case</span> <span style=color:#ff79c6>&lt;-</span>shutdown:
+</span></span><span style=display:flex><span>            done <span style=color:#ff79c6>&lt;-</span> i
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }()
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>time.<span style=color:#50fa7b>Sleep</span>(<span style=color:#bd93f9>2</span> <span style=color:#ff79c6>*</span> time.Second)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// Close the channel. All goroutines will immediately &#34;unblock&#34;.
+</span></span></span><span style=display:flex><span><span style=color:#6272a4></span><span style=color:#8be9fd;font-style:italic>close</span>(shutdown)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>for</span> i <span style=color:#ff79c6>:=</span> <span style=color:#bd93f9>0</span>; i &lt; n; i<span style=color:#ff79c6>++</span> {
+</span></span><span style=display:flex><span>    fmt.<span style=color:#50fa7b>Println</span>(<span style=color:#f1fa8c>&#34;routine&#34;</span>, <span style=color:#ff79c6>&lt;-</span>done, <span style=color:#f1fa8c>&#34;has exited!&#34;</span>)
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div></div></main><script async src="https://www.googletagmanager.com/gtag/js?id=G-CHP0LWG5GF"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-CHP0LWG5GF")</script></body></html>
